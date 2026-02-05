@@ -4,6 +4,8 @@ import ValueStatement from "@/components/landing/ValueStatement";
 import FeatureGrid from "@/components/landing/FeatureGrid";
 import GettingStarted from "@/components/landing/GettingStarted";
 import PrivacyTrust from "@/components/landing/PrivacyTrust";
+ import FAQ from "@/components/landing/FAQ";
+ import Testimonials from "@/components/landing/Testimonials";
 import ValentineBanner from "@/components/landing/ValentineBanner";
 import DownloadCTA from "@/components/landing/DownloadCTA";
 import Footer from "@/components/landing/Footer";
@@ -18,6 +20,8 @@ const Index = () => {
         <FeatureGrid />
         <GettingStarted />
         <PrivacyTrust />
+       <FAQ />
+       <Testimonials />
         <ValentineBanner />
         <DownloadCTA />
       </main>
