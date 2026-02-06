@@ -13,48 +13,69 @@ const Header = () => {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  const navLinks = ["Features", "How It Works", "Privacy", "Download"];
+  const navLinks = [
+    { name: "Features", href: "#features" },
+    { name: "How It Works", href: "#how-it-works" },
+    { name: "Privacy", href: "#privacy" },
+    { name: "Download", href: "#download" },
+  ];
+
+  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>, href: string) => {
+    e.preventDefault();
+    const element = document.querySelector(href);
+    if (element) {
+      const offsetTop = element.getBoundingClientRect().top + window.pageYOffset - 80;
+      window.scrollTo({
+        top: offsetTop,
+        behavior: "smooth"
+      });
+      setIsMobileMenuOpen(false);
+    }
+  };
 
   return (
-    <header 
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-        isScrolled 
-          ? "glass-card rounded-none py-3" 
-          : "py-5"
-      }`}
+    <header
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
+        ? "py-3 bg-background/90 backdrop-blur-md shadow-sm"
+        : "py-6 bg-transparent"
+        }`}
     >
       <div className="container-tight flex items-center justify-between">
-        {/* Logo */}
-        <a href="#" className="flex items-center gap-2 group">
-          <div className="w-9 h-9 rounded-xl bg-primary flex items-center justify-center transition-transform duration-300 group-hover:scale-105">
-            <span className="text-sm font-serif text-primary-foreground font-bold">B</span>
+        {/* Logo - Matching Image (Icon + Text) */}
+        <a href="#" className="flex items-center gap-3 group">
+          <div className="w-8 h-8 rounded bg-[#CD848C] flex items-center justify-center transition-transform duration-300 group-hover:scale-105 shadow-md shadow-rose-200">
+            <span className="text-sm font-serif font-bold text-white mt-0.5">B</span>
           </div>
-          <span className="font-serif text-xl text-foreground">Between</span>
+          <span className="font-serif text-xl text-[#4A4A4A]">Between</span>
         </a>
 
-        {/* Desktop Navigation */}
+        {/* Desktop Navigation - Centered & Grey */}
         <nav className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => (
-            <a 
-              key={link}
-              href="#"
-              className="text-muted-foreground hover:text-foreground transition-colors text-sm font-medium"
+            <a
+              key={link.name}
+              href={link.href}
+              onClick={(e) => scrollToSection(e, link.href)}
+              className="text-sm font-medium text-[#7A7575] hover:text-[#CD848C] transition-colors"
             >
-              {link}
+              {link.name}
             </a>
           ))}
         </nav>
 
-        {/* CTA Button */}
+        {/* CTA Button - Matching Image (Get Started) */}
         <div className="hidden md:block">
-          <button className="btn-primary py-2.5 px-6 text-sm">
+          <button
+            onClick={(e) => scrollToSection(e, "#download")}
+            className="bg-[#CD848C] hover:bg-[#B66A73] text-white px-6 py-2.5 rounded-full font-semibold text-sm transition-all shadow-[#CD848C]/20 shadow-lg"
+          >
             Get Started
           </button>
         </div>
 
         {/* Mobile Menu Button */}
-        <button 
-          className="md:hidden p-2 text-foreground"
+        <button
+          className="md:hidden p-2 text-[#4A4A4A]"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -63,19 +84,22 @@ const Header = () => {
 
       {/* Mobile Menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 glass-card rounded-t-none p-6 animate-fade-in">
+        <div className="md:hidden absolute top-full left-0 right-0 bg-background border-b border-rose-100 p-6 animate-fade-in shadow-lg">
           <nav className="flex flex-col gap-4">
             {navLinks.map((link) => (
-              <a 
-                key={link}
-                href="#"
-                className="text-foreground py-2 text-lg font-medium"
-                onClick={() => setIsMobileMenuOpen(false)}
+              <a
+                key={link.name}
+                href={link.href}
+                className="text-[#5A5A5A] py-2 text-base font-medium hover:text-[#CD848C] transition-colors"
+                onClick={(e) => scrollToSection(e, link.href)}
               >
-                {link}
+                {link.name}
               </a>
             ))}
-            <button className="btn-primary mt-4">
+            <button
+              onClick={(e) => scrollToSection(e, "#download")}
+              className="mt-4 bg-[#CD848C] text-white w-full py-3 rounded-full font-semibold"
+            >
               Get Started
             </button>
           </nav>

@@ -1,73 +1,71 @@
-# Welcome to your Lovable project
+# Between - A Quiet Space for Two
 
-## Project info
+![Between Hero](public/assets/hero-illustration.png)
 
-**URL**: https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID
+**Between** is a private digital sanctuary for couples. This landing page is designed with a "Soft Romantic" aesthetic, focusing on intimacy, calmness, and connection.
 
-## How can I edit this code?
+## 🌸 Design Philosophy: "Soft Romantic"
 
-There are several ways of editing your application.
+The UI is built on a foundation of emotional resonance, avoiding the noise of typical tech products.
 
-**Use Lovable**
+*   **Palette**: 
+    *   Background: Warm White (`#FAF8F6`)
+    *   Primary Accent: Soft Rose (`#CD848C`) highlights buttons, icons, and emphasized text.
+    *   Typography: Deep Charcoal (`#3A3535`) for readability.
+*   **Typography**:
+    *   *Headlines*: **Crimson Pro** (Serif) - Elegant, classic, and editorial.
+    *   *Body*: **Nunito** (Sans-serif) - Rounded, approachable, and modern.
+*   **Atmosphere**:
+    *   A continuous 3D background of floating hearts and subtle dust particles provides depth.
+    *   Glassmorphism and soft shadows (`shadow-soft`) create a light, airy feel.
+    *   Framer Motion animations provide gentle, staggered reveals.
 
-Simply visit the [Lovable Project](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and start prompting.
+## 🛠 Tech Stack
 
-Changes made via Lovable will be committed automatically to this repo.
+This project is built with a modern React stack optimized for performance and visual fidelity:
 
-**Use your preferred IDE**
+*   **Framework**: [React](https://react.dev/) + [Vite](https://vitejs.dev/)
+*   **Styling**: [Tailwind CSS](https://tailwindcss.com/)
+*   **Animations**: [Framer Motion](https://www.framer.com/motion/) (Scroll reveals, layout transitions)
+*   **3D Graphics**: [Three.js](https://threejs.org/) + [React Three Fiber](https://docs.pmndrs.assets/react-three-fiber) (Interactive particle background)
+*   **Icons**: [Lucide React](https://lucide.dev/) (Consistent, clean iconography)
 
-If you want to work locally using your own IDE, you can clone this repo and push changes. Pushed changes will also be reflected in Lovable.
+## 🚀 Getting Started
 
-The only requirement is having Node.js & npm installed - [install with nvm](https://github.com/nvm-sh/nvm#installing-and-updating)
+1.  **Clone the repository**
+    ```sh
+    git clone <YOUR_REPO_URL>
+    cd between-landing-page
+    ```
 
-Follow these steps:
+2.  **Install dependencies**
+    ```sh
+    npm install
+    ```
 
-```sh
-# Step 1: Clone the repository using the project's Git URL.
-git clone <YOUR_GIT_URL>
+3.  **Run Development Server**
+    ```sh
+    npm run dev
+    ```
 
-# Step 2: Navigate to the project directory.
-cd <YOUR_PROJECT_NAME>
+4.  **Build for Production**
+    ```sh
+    npm run build
+    ```
 
-# Step 3: Install the necessary dependencies.
-npm i
+## 📂 Project Structure
 
-# Step 4: Start the development server with auto-reloading and an instant preview.
-npm run dev
-```
+*   `src/components/landing/`: Core UI sections (Hero, Features, Testimonials, etc.)
+*   `src/components/landing/ThreeCanvas.tsx`: The global 3D background logic.
+*   `src/index.css`: Global design tokens, font imports, and Tailwind configuration.
 
-**Edit a file directly in GitHub**
+## ✨ Key Features
 
-- Navigate to the desired file(s).
-- Click the "Edit" button (pencil icon) at the top right of the file view.
-- Make your changes and commit the changes.
+*   **Interactive 3D Background**: Floating hearts that respond to mouse movement.
+*   **Dynamic Counters**: Feature statistics (`12,847+`) animate up on scroll.
+*   **Smooth Navigation**: Navbar links smoothly scroll to sections.
+*   **Responsive**: Fully optimized for Mobile, Tablet, and Desktop.
 
-**Use GitHub Codespaces**
+---
 
-- Navigate to the main page of your repository.
-- Click on the "Code" button (green button) near the top right.
-- Select the "Codespaces" tab.
-- Click on "New codespace" to launch a new Codespace environment.
-- Edit files directly within the Codespace and commit and push your changes once you're done.
-
-## What technologies are used for this project?
-
-This project is built with:
-
-- Vite
-- TypeScript
-- React
-- shadcn-ui
-- Tailwind CSS
-
-## How can I deploy this project?
-
-Simply open [Lovable](https://lovable.dev/projects/REPLACE_WITH_PROJECT_ID) and click on Share -> Publish.
-
-## Can I connect a custom domain to my Lovable project?
-
-Yes, you can!
-
-To connect a domain, navigate to Project > Settings > Domains and click Connect Domain.
-
-Read more here: [Setting up a custom domain](https://docs.lovable.dev/features/custom-domain#custom-domain)
+© 2024 Between Inc. Made with ♥ for love.

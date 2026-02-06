@@ -1,87 +1,79 @@
-import { Download, UserPlus, Heart, Send } from "lucide-react";
-
-interface StepProps {
-  number: number;
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-}
-
-const Step = ({ number, icon, title, description }: StepProps) => {
-  return (
-    <div className="flex flex-col items-center text-center group">
-      {/* Step indicator */}
-      <div className="relative mb-6">
-        <div className="w-20 h-20 rounded-3xl bg-rose-light/60 flex items-center justify-center transition-all duration-500 group-hover:bg-rose-light group-hover:scale-105 group-hover:shadow-glow">
-          {icon}
-        </div>
-        <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold">
-          {number}
-        </div>
-      </div>
-      
-      <h3 className="font-serif text-xl text-foreground mb-2">
-        {title}
-      </h3>
-      
-      <p className="text-muted-foreground text-sm leading-relaxed max-w-[200px]">
-        {description}
-      </p>
-    </div>
-  );
-};
+import { Download, UserPlus, Send, Heart } from "lucide-react";
+import { motion } from "framer-motion";
 
 const GettingStarted = () => {
   const steps = [
-    {
-      icon: <Download className="w-8 h-8 text-primary" />,
-      title: "Download Between",
-      description: "Get the app on iOS or Android—it takes just a moment.",
-    },
-    {
-      icon: <UserPlus className="w-8 h-8 text-primary" />,
-      title: "Create Your Space",
-      description: "Set up your private sanctuary with a simple profile.",
-    },
-    {
-      icon: <Send className="w-8 h-8 text-primary" />,
-      title: "Invite Your Person",
-      description: "Send a special invite link to connect your hearts.",
-    },
-    {
-      icon: <Heart className="w-8 h-8 text-primary" />,
-      title: "Start Your Journey",
-      description: "Begin sharing moments and growing together.",
-    },
+    { num: 1, icon: <Download className="w-6 h-6" />, title: "Download Between", desc: "Get the app on iOS or Android—it takes just a moment." },
+    { num: 2, icon: <UserPlus className="w-6 h-6" />, title: "Create Your Space", desc: "Set up your private sanctuary with a simple profile." },
+    { num: 3, icon: <Send className="w-6 h-6" />, title: "Invite Your Person", desc: "Send a special invite link to connect your hearts." },
+    { num: 4, icon: <Heart className="w-6 h-6" />, title: "Start Your Journey", desc: "Begin sharing moments and growing together." }
   ];
 
   return (
-    <section className="section-padding bg-gradient-to-b from-background to-cream-dark/30">
+    <section className="py-24 relative z-10 bg-transparent">
       <div className="container-tight">
         <div className="text-center mb-16">
-          <span className="inline-block text-blue-mist text-sm font-semibold tracking-wide uppercase mb-4">
-            How It Works
-          </span>
-          <h2 className="font-serif text-3xl md:text-4xl lg:text-5xl text-foreground mb-6">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="font-serif text-4xl md:text-5xl text-[#3A3535] mb-4"
+          >
             Getting started is easy
-          </h2>
-          <p className="text-muted-foreground text-lg max-w-xl mx-auto">
+          </motion.h2>
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: 0.1 }}
+            className="text-[#8A8585] text-lg font-sans"
+          >
             Four simple steps to your private space together.
-          </p>
+          </motion.p>
         </div>
 
-        {/* Steps with connecting line */}
         <div className="relative">
-          {/* Connecting line - desktop */}
-          <div className="hidden lg:block absolute top-10 left-[15%] right-[15%] h-0.5 bg-gradient-to-r from-rose-light via-primary/30 to-rose-light" />
-          
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
-            {steps.map((step, index) => (
-              <Step
-                key={step.title}
-                number={index + 1}
-                {...step}
-              />
+          {/* Connecting Line (Desktop) */}
+          <motion.div
+            initial={{ scaleX: 0 }}
+            whileInView={{ scaleX: 1 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
+            className="hidden md:block absolute top-[2.5rem] left-[10%] right-[10%] h-px bg-[#EAE8E4] -z-10 origin-left"
+          />
+
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+            {steps.map((step, i) => (
+              <motion.div
+                key={i}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.5, delay: 0.2 + (i * 0.15) }}
+                className="flex flex-col items-center text-center group"
+              >
+                <div className="relative mb-6">
+                  {/* Icon Circle */}
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 10 }}
+                    className="w-20 h-20 rounded-[2rem] bg-[#FFF0F2] flex items-center justify-center text-[#CD848C] transition-colors duration-500"
+                  >
+                    {step.icon}
+                  </motion.div>
+
+                  {/* Number Badge */}
+                  <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-[#CD848C] text-white flex items-center justify-center font-bold text-sm shadow-md border-2 border-[#FAF8F6]">
+                    {step.num}
+                  </div>
+                </div>
+
+                <h3 className="font-serif text-xl font-medium text-[#3A3535] mb-3">{step.title}</h3>
+                <p className="text-[#9A9595] text-sm leading-relaxed px-2 font-sans">
+                  {step.desc}
+                </p>
+              </motion.div>
             ))}
           </div>
         </div>
