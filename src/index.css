@@ -9,43 +9,50 @@
 @layer base {
   :root {
     /* Pale Off-White/Pink Background */
-    --background: 350 20% 98%;
-    --foreground: 0 0% 25%;
-    /* Soft Dark Grey */
+    --background: 30 20% 98%;
+    --foreground: 0 0% 20%;
 
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 25%;
+    --card-foreground: 0 0% 20%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 25%;
+    --popover-foreground: 0 0% 20%;
 
-    /* Image-matched Pink */
-    --primary: 348 45% 65%;
-    /* Soft Rose #D48490 approx */
+    /* Refined Primary - Soft Rose */
+    --primary: 348 45% 68%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 30 15% 92%;
-    /* Warm Beige/Grey for secondary button */
-    --secondary-foreground: 0 0% 30%;
+    /* Soft Warm Beige/Grey */
+    --secondary: 30 14% 94%;
+    --secondary-foreground: 0 0% 40%;
 
-    --muted: 30 10% 96%;
-    --muted-foreground: 0 0% 50%;
+    --muted: 30 10% 97%;
+    --muted-foreground: 0 0% 45%;
 
-    --accent: 348 45% 95%;
-    --accent-foreground: 348 45% 50%;
+    --accent: 348 45% 97%;
+    --accent-foreground: 348 45% 55%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
-    --border: 30 10% 90%;
-    --input: 30 10% 90%;
-    --ring: 348 45% 65%;
+    --border: 30 10% 92%;
+    --input: 30 10% 92%;
+    --ring: 348 45% 68%;
 
-    --radius: 1.5rem;
-    /* Rounder corners */
+    --radius: 2rem;
 
-    /* Soft Shadows */
-    --shadow-soft: 0 10px 30px -4px rgba(212, 132, 144, 0.15);
+    /* Custom Tokens for Romantic Aesthetic */
+    --rose-soft: 348 45% 94%;
+    --rose-light: 348 45% 85%;
+    --rose-glow: 348 45% 68% / 0.15;
+
+    --blue-mist: 210 20% 96%;
+    --blue-light: 210 20% 90%;
+
+    --cream: 35 30% 96%;
+    --cream-dark: 35 25% 92%;
+
+    --charcoal: 0 0% 22%;
   }
 }
 
@@ -74,21 +81,39 @@
 
   /* Soft Buttons matching image */
   .btn-primary {
-    @apply bg-[#CD848C] text-white px-8 py-3 rounded-full font-semibold text-base hover:bg-[#B66A73] hover:shadow-lg transition-all duration-300 shadow-[#CD848C]/30;
+    @apply bg-primary text-primary-foreground px-8 py-3.5 rounded-full font-semibold text-base hover:opacity-90 hover:shadow-glow transition-all duration-300 shadow-lg shadow-primary/20 flex items-center justify-center gap-2;
   }
 
   .btn-secondary {
-    @apply bg-[#EAE8E4] text-[#5A5A5A] px-8 py-3 rounded-full font-semibold text-base hover:bg-[#DEDCD9] transition-all duration-300;
+    @apply bg-secondary text-secondary-foreground px-8 py-3.5 rounded-full font-semibold text-base hover:bg-secondary/80 transition-all duration-300 flex items-center justify-center gap-2;
   }
 
   .container-tight {
-    @apply max-w-6xl mx-auto px-6 md:px-8;
+    @apply max-w-6xl mx-auto px-6 md:px-12 lg:px-16;
+  }
+
+  /* Glassmorphism */
+  .glass-card {
+    @apply bg-white/70 backdrop-blur-xl border border-white/20 shadow-soft;
+  }
+
+  .glass-panel {
+    @apply bg-white/40 backdrop-blur-md border border-white/10;
   }
 
   /* Serif Italics */
   .font-serif-italic {
     font-family: 'Crimson Pro', serif;
     font-style: italic;
+  }
+
+  /* Refined Typography */
+  .heading-hero {
+    @apply font-serif text-5xl md:text-7xl lg:text-8xl leading-[1.1] tracking-tight;
+  }
+
+  .heading-section {
+    @apply font-serif text-4xl md:text-5xl lg:text-6xl leading-tight tracking-tight;
   }
 }
 

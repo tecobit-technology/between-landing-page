@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Heart } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -7,7 +8,7 @@ const Header = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 20);
+      setIsScrolled(window.scrollY > 10);
     };
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
@@ -17,7 +18,6 @@ const Header = () => {
     { name: "Features", href: "#features" },
     { name: "How It Works", href: "#how-it-works" },
     { name: "Privacy", href: "#privacy" },
-    { name: "Download", href: "#download" },
   ];
 
   const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>, href: string) => {
@@ -35,39 +35,40 @@ const Header = () => {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
-        ? "py-3 bg-background/90 backdrop-blur-md shadow-sm"
-        : "py-6 bg-transparent"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
+        ? "py-4 bg-white/80 backdrop-blur-xl border-b border-rose-100/50 shadow-soft"
+        : "py-8 bg-transparent"
         }`}
     >
       <div className="container-tight flex items-center justify-between">
-        {/* Logo - Matching Image (Icon + Text) */}
-        <a href="#" className="flex items-center gap-3 group">
-          <div className="w-8 h-8 rounded bg-[#CD848C] flex items-center justify-center transition-transform duration-300 group-hover:scale-105 shadow-md shadow-rose-200">
-            <span className="text-sm font-serif font-bold text-white mt-0.5">B</span>
+        {/* Logo */}
+        <a href="#" className="flex items-center gap-2 group">
+          <div className="relative w-10 h-10 rounded-xl bg-primary flex items-center justify-center transition-all duration-500 group-hover:rotate-6 group-hover:scale-110 shadow-lg shadow-primary/20">
+            <Heart className="w-5 h-5 text-white fill-current" />
           </div>
-          <span className="font-serif text-xl text-[#4A4A4A]">Between</span>
+          <span className="font-serif text-2xl text-charcoal font-medium">Between</span>
         </a>
 
-        {/* Desktop Navigation - Centered & Grey */}
-        <nav className="hidden md:flex items-center gap-8">
+        {/* Desktop Navigation */}
+        <nav className="hidden md:flex items-center gap-10">
           {navLinks.map((link) => (
             <a
               key={link.name}
               href={link.href}
               onClick={(e) => scrollToSection(e, link.href)}
-              className="text-sm font-medium text-[#7A7575] hover:text-[#CD848C] transition-colors"
+              className="text-sm font-semibold text-secondary-foreground hover:text-primary transition-colors relative group"
             >
               {link.name}
+              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
             </a>
           ))}
         </nav>
 
-        {/* CTA Button - Matching Image (Get Started) */}
+        {/* CTA Button */}
         <div className="hidden md:block">
           <button
             onClick={(e) => scrollToSection(e, "#download")}
-            className="bg-[#CD848C] hover:bg-[#B66A73] text-white px-6 py-2.5 rounded-full font-semibold text-sm transition-all shadow-[#CD848C]/20 shadow-lg"
+            className="btn-primary py-2.5 px-6 text-sm"
           >
             Get Started
           </button>
@@ -75,7 +76,7 @@ const Header = () => {
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden p-2 text-[#4A4A4A]"
+          className="md:hidden p-2 text-charcoal"
           onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
         >
           {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -83,28 +84,35 @@ const Header = () => {
       </div>
 
       {/* Mobile Menu */}
-      {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-full left-0 right-0 bg-background border-b border-rose-100 p-6 animate-fade-in shadow-lg">
-          <nav className="flex flex-col gap-4">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="text-[#5A5A5A] py-2 text-base font-medium hover:text-[#CD848C] transition-colors"
-                onClick={(e) => scrollToSection(e, link.href)}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="md:hidden absolute top-full left-0 right-0 bg-white border-b border-rose-100 overflow-hidden shadow-xl"
+          >
+            <nav className="flex flex-col p-6 gap-4">
+              {navLinks.map((link) => (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  className="text-charcoal py-3 text-lg font-medium border-b border-rose-50/50"
+                  onClick={(e) => scrollToSection(e, link.href)}
+                >
+                  {link.name}
+                </a>
+              ))}
+              <button
+                onClick={(e) => scrollToSection(e, "#download")}
+                className="btn-primary w-full mt-4"
               >
-                {link.name}
-              </a>
-            ))}
-            <button
-              onClick={(e) => scrollToSection(e, "#download")}
-              className="mt-4 bg-[#CD848C] text-white w-full py-3 rounded-full font-semibold"
-            >
-              Get Started
-            </button>
-          </nav>
-        </div>
-      )}
+                Get Started
+              </button>
+            </nav>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 };

@@ -1,4 +1,4 @@
-import { MessageCircle, Camera, Sparkles, Heart, Calendar, Route } from "lucide-react";
+import { MessageCircle, Camera, Sparkles, Heart, Calendar, Lock } from "lucide-react";
 import { motion, useInView, useSpring, useTransform } from "framer-motion";
 import { useEffect, useRef, useState } from "react";
 
@@ -15,7 +15,7 @@ interface FeatureCardProps {
 const NumberCounter = ({ value, suffix = "" }: { value: number; suffix?: string }) => {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true });
-  const spring = useSpring(0, { mass: 1, stiffness: 50, damping: 20, duration: 2000 });
+  const spring = useSpring(0, { mass: 1, stiffness: 50, damping: 20 });
   const displayValue = useTransform(spring, (current) => Math.round(current));
   const [displayString, setDisplayString] = useState("0");
 
@@ -39,30 +39,35 @@ const FeatureCard = ({ icon, title, description, stat, statSuffix, statLabel, in
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-50px" }}
-      transition={{ duration: 0.6, delay: index * 0.1, ease: "easeOut" }}
-      className="group flex flex-col p-8 rounded-[2rem] bg-white border border-[#EAE8E4] shadow-sm hover:shadow-xl hover:shadow-[#CD848C]/10 hover:border-[#CD848C]/30 transition-all duration-500 h-full"
+      viewport={{ once: true, margin: "-100px" }}
+      transition={{ duration: 0.6, delay: index * 0.1 }}
+      className="group relative flex flex-col p-8 md:p-10 rounded-[2.5rem] bg-white border border-rose-100/50 shadow-soft hover:shadow-lifted transition-all duration-500 h-full overflow-hidden"
     >
-      <div className="mb-6 inline-flex items-center justify-center w-12 h-12 rounded-2xl bg-[#FFF0F2] text-[#CD848C] group-hover:scale-110 transition-transform duration-500">
-        {icon}
-      </div>
+      {/* Subtle Aura Hover Effect */}
+      <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-      <h3 className="font-serif text-xl font-medium text-[#3A3535] mb-3 group-hover:text-[#CD848C] transition-colors duration-300">
-        {title}
-      </h3>
-
-      <p className="text-[#8A8585] text-sm leading-relaxed font-sans mb-auto">
-        {description}
-      </p>
-
-      {stat !== undefined && (
-        <div className="mt-8 pt-6 border-t border-[#FAF8F6]">
-          <div className="text-2xl font-bold font-serif mb-1 text-[#CD848C]">
-            <NumberCounter value={stat} suffix={statSuffix} />
-          </div>
-          <div className="text-[10px] uppercase tracking-wider text-[#9A9595] font-medium mt-1">{statLabel}</div>
+      <div className="relative z-10">
+        <div className="mb-8 inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-accent text-primary group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
+          {icon}
         </div>
-      )}
+
+        <h3 className="font-serif text-2xl font-medium text-charcoal mb-4 group-hover:text-primary transition-colors duration-300">
+          {title}
+        </h3>
+
+        <p className="text-secondary-foreground text-base leading-relaxed mb-8">
+          {description}
+        </p>
+
+        {stat !== undefined && (
+          <div className="mt-auto pt-8 border-t border-rose-50">
+            <div className="text-3xl font-bold font-serif text-primary">
+              <NumberCounter value={stat} suffix={statSuffix} />
+            </div>
+            <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground font-semibold mt-2">{statLabel}</div>
+          </div>
+        )}
+      </div>
     </motion.div>
   );
 };
@@ -70,78 +75,80 @@ const FeatureCard = ({ icon, title, description, stat, statSuffix, statLabel, in
 const FeatureGrid = () => {
   const features = [
     {
-      icon: <MessageCircle className="w-5 h-5" />,
+      icon: <MessageCircle className="w-6 h-6" />,
       title: "Private Couple Chat",
-      description: "Your conversations, shared only between two. Secure, intimate, and beautifully simple.",
+      description: "Encrypted, intimate, and distraction-free. Your messages belong to just the two of you.",
     },
     {
-      icon: <Camera className="w-5 h-5" />,
-      title: "Moments Captured",
-      description: "A private gallery of your shared memories. Photos that tell your story.",
+      icon: <Camera className="w-6 h-6" />,
+      title: "Moments & Gallery",
+      description: "A shared sanctuary for your photos. relive your favorite memories anytime, anywhere.",
       stat: 12847,
       statSuffix: "+",
-      statLabel: "Moments shared today"
+      statLabel: "Moments Shared Today"
     },
     {
-      icon: <Sparkles className="w-5 h-5" />,
-      title: "Daily Connection Prompts",
-      description: "Thoughtful questions and activities to deepen your bond, delivered daily.",
+      icon: <Sparkles className="w-6 h-6" />,
+      title: "Daily Prompts",
+      description: "Thoughtful questions to spark deeper conversations and meaningful connections every day.",
     },
     {
-      icon: <Heart className="w-5 h-5" />,
-      title: "Thinking of You Pulse",
-      description: "A gentle tap to let them know they're on your mind—no words needed.",
+      icon: <Heart className="w-6 h-6" />,
+      title: "Thinking of You",
+      description: "Send a gentle notification to let your partner know they're on your mind with a single tap.",
     },
     {
-      icon: <Calendar className="w-5 h-5" />,
-      title: "Journey Counter",
-      description: "Celebrate every milestone. Days together, memories made, love grown.",
+      icon: <Calendar className="w-6 h-6" />,
+      title: "Journey Journal",
+      description: "Celebrate milestones and track your growth as a couple with a beautiful shared timeline.",
       stat: 847,
       statSuffix: "+",
-      statLabel: "Days together on average"
+      statLabel: "Average Days Connected"
     },
     {
-      icon: <Route className="w-5 h-5" />,
-      title: "Relationship Timeline",
-      description: "A beautiful visual history of your journey together, from day one.",
+      icon: <Lock className="w-6 h-6" />,
+      title: "Privacy First",
+      description: "End-to-end encryption and no data selling. Your relationship is private, as it should be.",
     },
   ];
 
   return (
-    <section className="py-24 md:py-32 relative z-10">
+    <section className="py-24 md:py-32 bg-[#FAF8F6]/30">
       <div className="container-tight">
-        <div className="text-center mb-16 md:mb-20">
-          <motion.span
+        <div className="text-center mb-16 md:mb-24">
+          <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="text-[#CD848C] font-bold tracking-[0.2em] uppercase text-xs mb-4 block"
+            className="flex justify-center items-center gap-2 mb-4"
           >
-            FEATURES
-          </motion.span>
+            <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+            <span className="text-primary font-bold tracking-[0.3em] uppercase text-xs">
+              DESIGNED FOR TWO
+            </span>
+          </motion.div>
+
           <motion.h2
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="font-serif text-4xl md:text-5xl text-[#3A3535] mb-4"
+            className="heading-section text-charcoal mb-6"
           >
-            Everything you need, <br />
-            <span className="text-[#8A8585]">nothing you don't</span>
+            Beautifully simple <br />
+            <span className="font-serif-italic text-secondary-foreground italic text-[0.9em]">for your intentional bond</span>
           </motion.h2>
+
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-[#9A9595] text-base max-w-lg mx-auto font-sans leading-relaxed"
+            className="text-secondary-foreground text-lg max-w-2xl mx-auto leading-relaxed"
           >
-            Carefully crafted features to nurture your relationship without overwhelming it.
+            Between brings you closer with features that matter, and leaves out everything that doesn't.
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
           {features.map((feature, index) => (
             <FeatureCard
               key={feature.title}

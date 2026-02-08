@@ -1,18 +1,21 @@
-import { Lock, EyeOff, Server } from "lucide-react";
+import { Lock, EyeOff, ShieldCheck, Apple, Play, Heart } from "lucide-react";
 import { motion } from "framer-motion";
 
 const PrivacyTrust = () => {
   return (
-    <section className="py-24 relative z-10">
+    <section className="py-24 md:py-32 relative overflow-hidden">
       <div className="container-tight">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.7, ease: "easeOut" }}
-          className="bg-white rounded-[3rem] p-8 md:p-20 shadow-xl shadow-[#CD848C]/5 border border-[#EAE8E4]/50"
+          className="bg-white rounded-[4rem] p-10 md:p-20 shadow-soft border border-rose-100/50 relative overflow-hidden"
         >
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 items-center">
+          {/* Subtle Background Pattern */}
+          <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 blur-3xl rounded-full translate-x-1/2 -translate-y-1/2" />
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center relative z-10">
 
             {/* Left Column */}
             <motion.div
@@ -21,26 +24,36 @@ const PrivacyTrust = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <span className="text-[#CD848C] font-bold tracking-[0.2em] uppercase text-xs mb-6 block">
-                PRIVACY & TRUST
-              </span>
-              <h2 className="font-serif text-4xl md:text-5xl text-[#3A3535] mb-6 leading-tight">
+              <div className="flex items-center gap-2 mb-6">
+                <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+                <span className="text-primary font-bold tracking-[0.3em] uppercase text-xs">
+                  PRIVACY & TRUST
+                </span>
+              </div>
+
+              <h2 className="heading-section text-charcoal mb-8">
                 Your space is sacred. <br />
-                We keep it that way.
+                <span className="font-serif-italic text-secondary-foreground italic text-[0.9em]">We keep it that way</span>
               </h2>
-              <p className="text-[#8A8585] text-lg leading-relaxed mb-8 font-sans">
+
+              <p className="text-secondary-foreground text-lg leading-relaxed mb-10">
                 Between is built on a foundation of trust. We believe the most intimate parts of your relationship deserve the highest level of protection—and that's exactly what we provide.
               </p>
-              <div className="h-1 w-20 bg-[#CD848C]/20 rounded-full" />
+
+              <div className="flex items-center gap-4 p-4 rounded-2xl bg-accent/50 border border-rose-100/50 w-fit">
+                <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-primary shadow-sm">
+                  <ShieldCheck size={20} />
+                </div>
+                <span className="text-sm font-semibold text-charcoal">GDPR Compliant & Encrypted</span>
+              </div>
             </motion.div>
 
             {/* Right Column */}
-            <div className="flex flex-col gap-10">
-
+            <div className="space-y-12">
               {[
                 { icon: <Lock className="w-6 h-6" />, title: "End-to-End Encrypted", desc: "Your messages are encrypted before they leave your device. Only you two can read them." },
-                { icon: <EyeOff className="w-6 h-6" />, title: "No Third-Party Access", desc: "We don't sell your data. We don't show ads. Your privacy is our promise." },
-                { icon: <Server className="w-6 h-6" />, title: "Secure Infrastructure", desc: "Industry-leading security standards protect your shared history and memories." }
+                { icon: <EyeOff className="w-6 h-6" />, title: "No Third-Party Access", desc: "We don't sell your data. We don't show ads. Your privacy is our only priority." },
+                { icon: <Lock className="w-6 h-6" />, title: "Secure Infrastructure", desc: "Industry-leading security standards protect your shared history and memories forever." }
               ].map((item, index) => (
                 <motion.div
                   key={index}
@@ -48,20 +61,19 @@ const PrivacyTrust = () => {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ duration: 0.5, delay: 0.4 + (index * 0.15) }}
-                  className="flex gap-6"
+                  className="flex gap-8 group"
                 >
-                  <div className="flex-none w-14 h-14 rounded-2xl bg-[#FFF0F2] flex items-center justify-center text-[#CD848C]">
+                  <div className="flex-none w-14 h-14 rounded-2xl bg-accent text-primary flex items-center justify-center transition-all duration-500 group-hover:bg-primary group-hover:text-white group-hover:shadow-glow translate-y-1">
                     {item.icon}
                   </div>
                   <div>
-                    <h3 className="font-serif text-xl font-bold text-[#3A3535] mb-2">{item.title}</h3>
-                    <p className="text-[#9A9595] text-sm leading-relaxed">
+                    <h3 className="font-serif text-2xl font-bold text-charcoal mb-3 group-hover:text-primary transition-colors">{item.title}</h3>
+                    <p className="text-secondary-foreground text-base leading-relaxed">
                       {item.desc}
                     </p>
                   </div>
                 </motion.div>
               ))}
-
             </div>
           </div>
         </motion.div>

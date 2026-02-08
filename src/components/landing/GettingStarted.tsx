@@ -3,22 +3,34 @@ import { motion } from "framer-motion";
 
 const GettingStarted = () => {
   const steps = [
-    { num: 1, icon: <Download className="w-6 h-6" />, title: "Download Between", desc: "Get the app on iOS or Android—it takes just a moment." },
-    { num: 2, icon: <UserPlus className="w-6 h-6" />, title: "Create Your Space", desc: "Set up your private sanctuary with a simple profile." },
-    { num: 3, icon: <Send className="w-6 h-6" />, title: "Invite Your Person", desc: "Send a special invite link to connect your hearts." },
-    { num: 4, icon: <Heart className="w-6 h-6" />, title: "Start Your Journey", desc: "Begin sharing moments and growing together." }
+    { num: "01", icon: <Download className="w-6 h-6" />, title: "Download Between", desc: "Get the app on iOS or Android—it takes just a moment to start your journey." },
+    { num: "02", icon: <UserPlus className="w-6 h-6" />, title: "Create Your Space", desc: "Set up your private sanctuary with a simple profile for you and your partner." },
+    { num: "03", icon: <Send className="w-6 h-6" />, title: "Invite Your Person", desc: "Send a special encrypted invite link to connect your accounts securely." },
+    { num: "04", icon: <Heart className="w-6 h-6" />, title: "Grow Together", desc: "Begin sharing moments and building your digital home, just for the two of you." }
   ];
 
   return (
-    <section className="py-24 relative z-10 bg-transparent">
+    <section className="py-24 md:py-32 bg-white relative overflow-hidden">
       <div className="container-tight">
-        <div className="text-center mb-16">
+        <div className="text-center mb-16 md:mb-24">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="flex justify-center items-center gap-2 mb-4"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+            <span className="text-primary font-bold tracking-[0.3em] uppercase text-xs">
+              HOW IT WORKS
+            </span>
+          </motion.div>
+
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="font-serif text-4xl md:text-5xl text-[#3A3535] mb-4"
+            className="heading-section text-charcoal mb-4"
           >
             Getting started is easy
           </motion.h2>
@@ -27,9 +39,9 @@ const GettingStarted = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-[#8A8585] text-lg font-sans"
+            className="text-secondary-foreground text-lg max-w-xl mx-auto"
           >
-            Four simple steps to your private space together.
+            Four simple steps to create your private digital world.
           </motion.p>
         </div>
 
@@ -39,38 +51,34 @@ const GettingStarted = () => {
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.2, ease: "easeOut" }}
-            className="hidden md:block absolute top-[2.5rem] left-[10%] right-[10%] h-px bg-[#EAE8E4] -z-10 origin-left"
+            transition={{ duration: 1, delay: 0.5, ease: "easeInOut" }}
+            className="hidden lg:block absolute top-[2.75rem] left-[12%] right-[12%] h-0.5 bg-rose-100 -z-0 origin-left"
           />
 
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 relative z-10">
             {steps.map((step, i) => (
               <motion.div
                 key={i}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.2 + (i * 0.15) }}
+                transition={{ duration: 0.5, delay: i * 0.15 }}
                 className="flex flex-col items-center text-center group"
               >
-                <div className="relative mb-6">
+                <div className="relative mb-8">
                   {/* Icon Circle */}
-                  <motion.div
-                    whileHover={{ scale: 1.05 }}
-                    transition={{ type: "spring", stiffness: 300, damping: 10 }}
-                    className="w-20 h-20 rounded-[2rem] bg-[#FFF0F2] flex items-center justify-center text-[#CD848C] transition-colors duration-500"
-                  >
+                  <div className="w-20 h-20 rounded-[2.5rem] bg-accent flex items-center justify-center text-primary transition-all duration-500 group-hover:bg-primary group-hover:text-white shadow-soft group-hover:shadow-glow">
                     {step.icon}
-                  </motion.div>
+                  </div>
 
                   {/* Number Badge */}
-                  <div className="absolute -top-2 -right-2 w-8 h-8 rounded-full bg-[#CD848C] text-white flex items-center justify-center font-bold text-sm shadow-md border-2 border-[#FAF8F6]">
+                  <div className="absolute -top-3 -right-3 w-10 h-10 rounded-full bg-white text-primary flex items-center justify-center font-serif italic text-lg shadow-lifted border border-rose-50">
                     {step.num}
                   </div>
                 </div>
 
-                <h3 className="font-serif text-xl font-medium text-[#3A3535] mb-3">{step.title}</h3>
-                <p className="text-[#9A9595] text-sm leading-relaxed px-2 font-sans">
+                <h3 className="font-serif text-2xl font-medium text-charcoal mb-4 group-hover:text-primary transition-colors">{step.title}</h3>
+                <p className="text-secondary-foreground text-base leading-relaxed px-4">
                   {step.desc}
                 </p>
               </motion.div>
