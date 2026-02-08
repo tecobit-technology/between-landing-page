@@ -15,13 +15,14 @@ const Stat = ({ icon, label, value, delay }: StatProps) => (
         whileInView={{ opacity: 1, scale: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay }}
-        className="flex flex-col items-center text-center p-8 rounded-[2.5rem] bg-white border border-rose-100 shadow-soft relative group overflow-hidden"
+        className="flex flex-col items-center text-center p-8 rounded-[2.5rem] bg-card border border-primary/10 shadow-soft relative group overflow-hidden"
     >
         <div className="absolute inset-x-0 -bottom-1 h-1 bg-gradient-to-r from-transparent via-primary to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-700" />
-        <div className="w-16 h-16 rounded-2xl bg-accent flex items-center justify-center text-primary mb-6 transition-transform duration-500 group-hover:rotate-6 group-hover:scale-110 shadow-sm">
-            {icon}
+        <div className="w-16 h-16 rounded-2xl bg-accent flex items-center justify-center text-primary mb-6 transition-transform duration-500 group-hover:rotate-6 group-hover:scale-110 shadow-sm relative">
+            <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
+            <div className="relative z-10">{icon}</div>
         </div>
-        <div className="font-serif text-4xl md:text-5xl font-bold text-charcoal mb-2 tracking-tight">
+        <div className="font-serif text-4xl md:text-5xl font-bold text-neon mb-2 tracking-tight">
             {value}
         </div>
         <div className="text-secondary-foreground font-semibold uppercase tracking-[0.2em] text-xs">
@@ -62,7 +63,7 @@ const DataInsights2026 = () => {
     ];
 
     return (
-        <section ref={containerRef} className="py-24 md:py-32 relative overflow-hidden bg-rose-50/20">
+        <section ref={containerRef} className="py-24 md:py-32 relative overflow-hidden bg-background/20">
             {/* Decorative Elements */}
             <motion.div
                 style={{ opacity: useTransform(scrollYProgress, [0, 0.5], [0, 1]) }}
@@ -104,7 +105,7 @@ const DataInsights2026 = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.8, delay: 0.5 }}
-                    className="mt-20 p-8 md:p-12 rounded-[3.5rem] bg-white border border-rose-100/50 shadow-soft flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left"
+                    className="mt-20 p-8 md:p-12 rounded-[3.5rem] bg-card border border-primary/10 shadow-soft flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left"
                 >
                     <div className="max-w-xl">
                         <h3 className="font-serif text-2xl md:text-3xl text-charcoal mb-3 font-medium">Building for the next decade of love</h3>

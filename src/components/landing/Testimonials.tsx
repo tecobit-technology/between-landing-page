@@ -38,7 +38,7 @@ const Testimonials = () => {
   };
 
   return (
-    <section className="py-24 relative z-10 bg-white/50 border-y border-[#EAE8E4]/50">
+    <section className="py-24 md:py-32 bg-background/30">
       <div className="container-tight max-w-5xl">
 
         {/* Header */}
@@ -48,7 +48,7 @@ const Testimonials = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="font-serif text-4xl md:text-5xl text-[#3A3535] mb-4"
+            className="font-serif text-4xl md:text-5xl text-charcoal mb-4"
           >
             What Our Users Say
           </motion.h2>
@@ -57,19 +57,19 @@ const Testimonials = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-[#8A8585] text-lg font-sans"
+            className="text-secondary-foreground text-lg font-sans"
           >
             Stories from couples who found their quiet space
           </motion.p>
         </div>
 
         {/* Carousel Container */}
-        <div className="flex items-center justify-center gap-4 md:gap-12 text-[#3A3535]">
+        <div className="flex items-center justify-center gap-4 md:gap-12 text-charcoal">
 
           {/* Prev Button */}
           <button
             onClick={prevSlide}
-            className="hidden md:flex flex-none w-12 h-12 rounded-full bg-white border border-[#EAE8E4] items-center justify-center hover:bg-[#FAF8F6] hover:border-[#CD848C]/30 transition-all shadow-sm z-20"
+            className="hidden md:flex flex-none w-12 h-12 rounded-full bg-card border border-border items-center justify-center hover:bg-background hover:border-primary/30 transition-all shadow-sm z-20"
             aria-label="Previous testimonial"
           >
             <ChevronLeft className="w-5 h-5 opacity-60" />
@@ -84,32 +84,32 @@ const Testimonials = () => {
                 animate={{ opacity: 1, x: 0 }}
                 exit={{ opacity: 0, x: -20 }}
                 transition={{ duration: 0.4 }}
-                className="bg-[#FAF8F6] rounded-[2rem] p-8 md:p-12 flex flex-col justify-center h-full"
+                className="glass-card rounded-[2rem] p-8 md:p-12 flex flex-col justify-center h-full"
               >
 
                 {/* Pink Quote Icon */}
-                <div className="mb-6 text-[#CD848C]/40">
+                <div className="mb-6 text-primary/40">
                   <Quote className="w-10 h-10 fill-current ml-1" />
                 </div>
 
                 {/* Quote */}
-                <p className="font-serif text-xl md:text-2xl text-[#3A3535] leading-relaxed mb-6 font-medium">
+                <p className="font-serif text-xl md:text-2xl text-charcoal leading-relaxed mb-6 font-medium">
                   "{testimonials[activeIndex].quote}"
                 </p>
 
                 {/* Subtext */}
-                <p className="text-[#8A8585] text-sm md:text-base mb-8 font-light">
+                <p className="text-secondary-foreground text-sm md:text-base mb-8 font-light">
                   {testimonials[activeIndex].subtext}
                 </p>
 
                 {/* Author */}
                 <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-[#EBD5D8] text-[#CD848C] flex items-center justify-center font-bold text-sm tracking-widest">
+                  <div className="w-12 h-12 rounded-full bg-rose-soft text-primary flex items-center justify-center font-bold text-sm tracking-widest">
                     {testimonials[activeIndex].initials}
                   </div>
                   <div>
-                    <div className="font-bold text-[#3A3535]">{testimonials[activeIndex].author}</div>
-                    <div className="text-sm text-[#8A8585]">{testimonials[activeIndex].role}</div>
+                    <div className="font-bold text-charcoal">{testimonials[activeIndex].author}</div>
+                    <div className="text-sm text-secondary-foreground">{testimonials[activeIndex].role}</div>
                   </div>
                 </div>
               </motion.div>
@@ -119,7 +119,7 @@ const Testimonials = () => {
           {/* Next Button */}
           <button
             onClick={nextSlide}
-            className="hidden md:flex flex-none w-12 h-12 rounded-full bg-white border border-[#EAE8E4] items-center justify-center hover:bg-[#FAF8F6] hover:border-[#CD848C]/30 transition-all shadow-sm z-20"
+            className="hidden md:flex flex-none w-12 h-12 rounded-full bg-card border border-border items-center justify-center hover:bg-background hover:border-primary/30 transition-all shadow-sm z-20"
             aria-label="Next testimonial"
           >
             <ChevronRight className="w-5 h-5 opacity-60" />
@@ -134,17 +134,16 @@ const Testimonials = () => {
               onClick={() => setActiveIndex(idx)}
               aria-label={`Go to testimonial ${idx + 1}`}
               className={`transition-all duration-300 rounded-full ${idx === activeIndex
-                ? "w-8 h-1.5 bg-[#CD848C]"
-                : "w-1.5 h-1.5 bg-[#EAE8E4] hover:bg-[#D4C5C5]"
+                ? "w-8 h-1.5 bg-primary"
+                : "w-1.5 h-1.5 bg-border hover:bg-muted-foreground/30"
                 }`}
             />
           ))}
         </div>
 
-        {/* Mobile Nav (visible only on small screens) */}
         <div className="flex md:hidden justify-center gap-6 mt-6">
-          <button onClick={prevSlide} className="p-3 bg-white rounded-full shadow-sm text-[#CD848C]"><ChevronLeft /></button>
-          <button onClick={nextSlide} className="p-3 bg-white rounded-full shadow-sm text-[#CD848C]"><ChevronRight /></button>
+          <button onClick={prevSlide} className="p-3 bg-card rounded-full shadow-sm text-primary"><ChevronLeft /></button>
+          <button onClick={nextSlide} className="p-3 bg-card rounded-full shadow-sm text-primary"><ChevronRight /></button>
         </div>
 
       </div>

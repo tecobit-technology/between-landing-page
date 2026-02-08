@@ -10,7 +10,7 @@ const PrivacyTrust = () => {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.7, ease: "easeOut" }}
-          className="bg-white rounded-[4rem] p-10 md:p-20 shadow-soft border border-rose-100/50 relative overflow-hidden"
+          className="bg-card rounded-[4rem] p-10 md:p-20 shadow-soft border border-primary/10 relative overflow-hidden"
         >
           {/* Subtle Background Pattern */}
           <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 blur-3xl rounded-full translate-x-1/2 -translate-y-1/2" />
@@ -40,8 +40,8 @@ const PrivacyTrust = () => {
                 Between is built on a foundation of trust. We believe the most intimate parts of your relationship deserve the highest level of protection—and that's exactly what we provide.
               </p>
 
-              <div className="flex items-center gap-4 p-4 rounded-2xl bg-accent/50 border border-rose-100/50 w-fit">
-                <div className="w-10 h-10 rounded-xl bg-white flex items-center justify-center text-primary shadow-sm">
+              <div className="flex items-center gap-4 p-4 rounded-2xl bg-accent/50 border border-primary/10 w-fit">
+                <div className="w-10 h-10 rounded-xl bg-background flex items-center justify-center text-primary shadow-sm">
                   <ShieldCheck size={20} />
                 </div>
                 <span className="text-sm font-semibold text-charcoal">GDPR Compliant & Encrypted</span>

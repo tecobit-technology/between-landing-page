@@ -1,6 +1,7 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { Menu, X, Heart } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import ThemeToggle from "./ThemeToggle";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -8,11 +9,15 @@ const Header = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 10);
+      if (window.scrollY > 20) {
+        if (!isScrolled) setIsScrolled(true);
+      } else {
+        if (isScrolled) setIsScrolled(false);
+      }
     };
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
+  }, [isScrolled]);
 
   const navLinks = [
     { name: "Features", href: "#features" },
@@ -20,7 +25,7 @@ const Header = () => {
     { name: "Privacy", href: "#privacy" },
   ];
 
-  const scrollToSection = (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>, href: string) => {
+  const scrollToSection = useCallback((e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>, href: string) => {
     e.preventDefault();
     const element = document.querySelector(href);
     if (element) {
@@ -31,12 +36,12 @@ const Header = () => {
       });
       setIsMobileMenuOpen(false);
     }
-  };
+  }, []);
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${isScrolled
-        ? "py-4 bg-white/80 backdrop-blur-xl border-b border-rose-100/50 shadow-soft"
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ease-in-out ${isScrolled
+        ? "py-4 bg-white/70 dark:bg-black/70 backdrop-blur-2xl border-b border-rose-100/30 dark:border-white/10 shadow-soft"
         : "py-8 bg-transparent"
         }`}
     >
@@ -64,8 +69,9 @@ const Header = () => {
           ))}
         </nav>
 
-        {/* CTA Button */}
-        <div className="hidden md:block">
+        {/* CTA Button & Theme Toggle */}
+        <div className="hidden md:flex items-center gap-4">
+          <ThemeToggle />
           <button
             onClick={(e) => scrollToSection(e, "#download")}
             className="btn-primary py-2.5 px-6 text-sm"
@@ -74,13 +80,16 @@ const Header = () => {
           </button>
         </div>
 
-        {/* Mobile Menu Button */}
-        <button
-          className="md:hidden p-2 text-charcoal"
-          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-        >
-          {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-        </button>
+        <div className="flex md:hidden items-center gap-4">
+          <ThemeToggle />
+          {/* Mobile Menu Button */}
+          <button
+            className="p-2 text-charcoal"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          >
+            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+          </button>
+        </div>
       </div>
 
       {/* Mobile Menu */}
@@ -90,14 +99,14 @@ const Header = () => {
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: "auto" }}
             exit={{ opacity: 0, height: 0 }}
-            className="md:hidden absolute top-full left-0 right-0 bg-white border-b border-rose-100 overflow-hidden shadow-xl"
+            className="md:hidden absolute top-full left-0 right-0 bg-background border-b border-primary/10 overflow-hidden shadow-xl"
           >
             <nav className="flex flex-col p-6 gap-4">
               {navLinks.map((link) => (
                 <a
                   key={link.name}
                   href={link.href}
-                  className="text-charcoal py-3 text-lg font-medium border-b border-rose-50/50"
+                  className="text-charcoal py-3 text-lg font-medium border-b border-primary/5"
                   onClick={(e) => scrollToSection(e, link.href)}
                 >
                   {link.name}

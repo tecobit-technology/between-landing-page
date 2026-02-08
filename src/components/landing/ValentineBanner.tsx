@@ -10,8 +10,10 @@ const ValentineBanner = () => {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="relative overflow-hidden rounded-[3rem] bg-gradient-to-br from-primary to-primary/80 shadow-2xl shadow-primary/20 p-10 md:p-20"
+          className="relative overflow-hidden rounded-[3rem] bg-gradient-to-br from-primary via-primary/90 to-primary/80 shadow-[0_0_60px_rgba(245,53,170,0.3)] p-10 md:p-20 group"
         >
+          {/* Centered Glow Mesh */}
+          <div className="glow-mesh w-full h-full inset-0 opacity-40 bg-white/10 blur-[150px]" />
 
           {/* Decorative floating icons */}
           <Heart className="absolute top-10 right-10 text-white/10 w-16 h-16 -rotate-12" />
@@ -39,9 +41,9 @@ const ValentineBanner = () => {
 
             <div className="flex flex-col items-center gap-4 min-w-max">
               <motion.button
-                whileHover={{ scale: 1.05, y: -4 }}
+                whileHover={{ scale: 1.05, y: -4, boxShadow: "0 0 30px rgba(255,255,255,0.4)" }}
                 whileTap={{ scale: 0.98 }}
-                className="bg-white text-primary rounded-2xl px-12 py-5 font-bold text-lg transition-all duration-300 shadow-xl hover:shadow-white/20"
+                className="bg-white text-primary rounded-2xl px-12 py-5 font-bold text-lg transition-all duration-300 shadow-xl shadow-white/10"
               >
                 Claim Your Gift
               </motion.button>

@@ -18,22 +18,45 @@ const ThreeCanvas = () => {
             if (!container) return;
 
             scene = new THREE.Scene();
-            // Soft pinkish fog to blend with the background (matching --background: 30 20% 98% -> #faf8f6)
-            scene.fog = new THREE.FogExp2(0xfaf8f6, 0.001);
+
+            const getFogColor = () => document.documentElement.classList.contains('dark') ? 0x09090b : 0xfaf8f6;
+            scene.fog = new THREE.FogExp2(getFogColor(), 0.001);
 
             camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
             const isMobile = window.innerWidth < 768;
             camera.position.z = isMobile ? 800 : 500;
 
-            renderer = new THREE.WebGLRenderer({ alpha: true, antialias: true });
+            // Advanced Renderer Optimizations
+            renderer = new THREE.WebGLRenderer({
+                alpha: true,
+                antialias: true,
+                powerPreference: "high-performance"
+            });
             renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(window.devicePixelRatio);
+
+            // DPR Optimization for Retina Displays
+            const pixelRatio = Math.min(window.devicePixelRatio, 2);
+            renderer.setPixelRatio(pixelRatio);
+
             container.appendChild(renderer.domElement);
 
             createHeartParticles();
 
+            // Observe theme changes
+            const observer = new MutationObserver((mutations) => {
+                mutations.forEach((mutation) => {
+                    if (mutation.attributeName === 'class' && scene.fog) {
+                        (scene.fog as THREE.FogExp2).color.setHex(getFogColor());
+                    }
+                });
+            });
+            observer.observe(document.documentElement, { attributes: true });
+
             document.addEventListener('mousemove', onMouseMove, false);
             window.addEventListener('resize', onWindowResize, false);
+
+            // Store observer for cleanup
+            (init as any).observer = observer;
         };
 
         const createHeartParticles = () => {
@@ -71,18 +94,17 @@ const ThreeCanvas = () => {
                         offsetZ
                     );
 
-                    // Color Palette: Deep Rose to Soft Coral
-                    // Needed to stand out against the light background
+                    // Color Palette: Neon Pink to Soft Magenta (Matching #F535AA -> 324 91% 58%)
                     const r = Math.random();
                     if (r > 0.6) {
-                        // Deep Rose
-                        colors.push(0.9, 0.3, 0.4);
+                        // Neon Pink (Theme Primary)
+                        colors.push(0.96, 0.21, 0.67);
                     } else if (r > 0.3) {
-                        // Soft Pink
-                        colors.push(1.0, 0.6, 0.7);
+                        // Soft Magenta
+                        colors.push(1.0, 0.45, 0.82);
                     } else {
-                        // Muted Mauve
-                        colors.push(0.8, 0.5, 0.6);
+                        // Deep Rose
+                        colors.push(0.85, 0.15, 0.55);
                     }
                 }
             }
@@ -160,18 +182,48 @@ const ThreeCanvas = () => {
             renderer.render(scene, camera);
         };
 
-        init();
-        animate();
+        // Lazy Initialization
+        if (window.requestIdleCallback) {
+            window.requestIdleCallback(() => {
+                init();
+                animate();
+            });
+        } else {
+            setTimeout(() => {
+                init();
+                animate();
+            }, 100);
+        }
 
         return () => {
             cancelAnimationFrame(animationFrameId);
             document.removeEventListener('mousemove', onMouseMove);
             window.removeEventListener('resize', onWindowResize);
 
+            if ((init as any).observer) {
+                (init as any).observer.disconnect();
+            }
+
+            // Proactive Memory Cleanup - disposal of geometries and materials
+            if (particles) {
+                if (particles.geometry) particles.geometry.dispose();
+                if (particles.material) {
+                    if (Array.isArray(particles.material)) {
+                        particles.material.forEach(m => m.dispose());
+                    } else {
+                        particles.material.dispose();
+                    }
+                }
+                scene.remove(particles);
+            }
+
             if (mountRef.current && renderer && renderer.domElement) {
                 mountRef.current.removeChild(renderer.domElement);
             }
-            if (renderer) renderer.dispose();
+            if (renderer) {
+                renderer.dispose();
+                renderer.forceContextLoss();
+            }
         };
     }, []);
 

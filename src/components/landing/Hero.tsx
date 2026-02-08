@@ -29,6 +29,10 @@ const Hero = () => {
         </motion.div>
       </div>
 
+      {/* Atmospheric Glows */}
+      <div className="glow-mesh w-[500px] h-[500px] -top-20 -left-20 opacity-10" />
+      <div className="glow-mesh w-[600px] h-[600px] bottom-0 -right-20 opacity-10" />
+
       <div className="container-tight relative z-10 text-center">
         {/* Tiny Label */}
         <motion.div
@@ -51,7 +55,7 @@ const Hero = () => {
           className="heading-hero text-charcoal mb-4"
         >
           A quiet space <br />
-          <span className="font-serif-italic text-primary italic">for just the two of you</span>
+          <span className="font-serif-italic text-neon italic">for just the two of you</span>
         </motion.h1>
 
         {/* Subheadline */}
@@ -91,11 +95,11 @@ const Hero = () => {
           <motion.div
             animate={{ y: [0, -15, 0], rotateX: [2, 0, 2], rotateY: [-2, 0, -2] }}
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}
-            className="relative z-20 rounded-[3rem] border-[12px] border-charcoal bg-white shadow-2xl overflow-hidden aspect-[9/19.5]"
+            className="relative z-20 rounded-[3rem] border-[12px] border-charcoal bg-card shadow-2xl overflow-hidden aspect-[9/19.5]"
           >
             {/* Phone Content (Simulated UI) */}
-            <div className="absolute inset-0 bg-[#FAF8F6] p-4 flex flex-col pt-12">
-              <div className="h-40 w-full rounded-2xl bg-rose-50 border border-rose-100 mb-4 flex items-center justify-center">
+            <div className="absolute inset-0 bg-background p-4 flex flex-col pt-12">
+              <div className="h-40 w-full rounded-2xl bg-accent/50 border border-primary/10 mb-4 flex items-center justify-center">
                 <ImageIcon className="text-primary/40 w-12 h-12" />
               </div>
               <div className="space-y-3">
@@ -124,7 +128,7 @@ const Hero = () => {
             className="absolute -left-16 top-1/4 z-30 glass-card p-4 rounded-2xl shadow-xl hidden md:block"
           >
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-rose-100 flex items-center justify-center text-primary">
+              <div className="w-8 h-8 rounded-full bg-accent flex items-center justify-center text-primary">
                 <Heart size={16} fill="currentColor" />
               </div>
               <div className="text-left">
@@ -140,7 +144,7 @@ const Hero = () => {
             className="absolute -right-20 top-2/3 z-30 glass-card p-4 rounded-2xl shadow-xl hidden md:block"
           >
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-blue-50 flex items-center justify-center text-blue-400">
+              <div className="w-8 h-8 rounded-full bg-accent flex items-center justify-center text-blue-400">
                 <MessageCircle size={16} />
               </div>
               <div className="text-left">

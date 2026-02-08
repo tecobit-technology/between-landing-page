@@ -4,7 +4,7 @@ const Footer = () => {
   const currentYear = new Date().getFullYear();
 
   return (
-    <footer className="bg-white pt-24 pb-12 relative overflow-hidden">
+    <footer className="bg-background pt-24 pb-12 relative overflow-hidden">
       {/* Decorative Aura */}
       <div className="absolute bottom-0 left-0 w-96 h-96 bg-primary/5 blur-[100px] rounded-full -ml-32 -mb-32" />
 
@@ -66,7 +66,7 @@ const Footer = () => {
           </div>
         </div>
 
-        <div className="pt-8 border-t border-rose-50 flex flex-col md:flex-row justify-between items-center gap-6">
+        <div className="pt-8 border-t border-primary/5 flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-muted-foreground text-sm">
             &copy; {currentYear} Between Inc. All rights reserved. Made with love for couples.
           </p>

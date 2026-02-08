@@ -10,7 +10,7 @@ const GettingStarted = () => {
   ];
 
   return (
-    <section className="py-24 md:py-32 bg-white relative overflow-hidden">
+    <section className="py-24 md:py-32 bg-background relative overflow-hidden">
       <div className="container-tight">
         <div className="text-center mb-16 md:mb-24">
           <motion.div
@@ -52,7 +52,7 @@ const GettingStarted = () => {
             whileInView={{ scaleX: 1 }}
             viewport={{ once: true }}
             transition={{ duration: 1, delay: 0.5, ease: "easeInOut" }}
-            className="hidden lg:block absolute top-[2.75rem] left-[12%] right-[12%] h-0.5 bg-rose-100 -z-0 origin-left"
+            className="hidden lg:block absolute top-[2.75rem] left-[12%] right-[12%] h-0.5 bg-primary/20 -z-0 origin-left"
           />
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8 relative z-10">
@@ -72,7 +72,7 @@ const GettingStarted = () => {
                   </div>
 
                   {/* Number Badge */}
-                  <div className="absolute -top-3 -right-3 w-10 h-10 rounded-full bg-white text-primary flex items-center justify-center font-serif italic text-lg shadow-lifted border border-rose-50">
+                  <div className="absolute -top-3 -right-3 w-10 h-10 rounded-full bg-card text-primary flex items-center justify-center font-serif italic text-lg shadow-lifted border border-primary/10">
                     {step.num}
                   </div>
                 </div>

@@ -6,7 +6,7 @@ const FAQItem = ({ question, answer }: { question: string; answer: string }) => 
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="border-b border-rose-100 last:border-0">
+    <div className="border-b border-primary/10 last:border-0">
       <button
         className="w-full py-8 flex items-center justify-between text-left focus:outline-none group"
         onClick={() => setIsOpen(!isOpen)}
@@ -61,7 +61,7 @@ const FAQ = () => {
   ];
 
   return (
-    <section className="py-24 md:py-32 relative z-10 bg-white">
+    <section className="py-24 md:py-32 relative z-10 bg-background">
       <div className="container-tight max-w-4xl">
         <div className="text-center mb-16 md:mb-20">
           <motion.div
@@ -80,7 +80,7 @@ const FAQ = () => {
           </h2>
         </div>
 
-        <div className="flex flex-col bg-accent/30 rounded-[3rem] p-8 md:p-12 border border-rose-100/50">
+        <div className="flex flex-col bg-accent/30 rounded-[3rem] p-8 md:p-12 border border-primary/10">
           {faqs.map((faq, i) => (
             <FAQItem key={i} question={faq.q} answer={faq.a} />
           ))}

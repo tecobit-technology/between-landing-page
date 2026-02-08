@@ -1,6 +1,6 @@
-import { MessageCircle, Camera, Sparkles, Heart, Calendar, Lock } from "lucide-react";
+import { useRef, useState, useEffect, memo } from "react";
 import { motion, useInView, useSpring, useTransform } from "framer-motion";
-import { useEffect, useRef, useState } from "react";
+import { MessageCircle, Camera, Sparkles, Heart, Calendar, Lock } from "lucide-react";
 
 interface FeatureCardProps {
   icon: React.ReactNode;
@@ -34,24 +34,28 @@ const NumberCounter = ({ value, suffix = "" }: { value: number; suffix?: string 
   return <span ref={ref}>{displayString}{suffix}</span>;
 };
 
-const FeatureCard = ({ icon, title, description, stat, statSuffix, statLabel, index }: FeatureCardProps) => {
+const FeatureCard = memo(({ icon, title, description, stat, statSuffix, statLabel, index }: FeatureCardProps) => {
+  const isStaggered = index % 2 !== 0;
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-100px" }}
+      viewport={{ once: true }}
       transition={{ duration: 0.6, delay: index * 0.1 }}
-      className="group relative flex flex-col p-8 md:p-10 rounded-[2.5rem] bg-white border border-rose-100/50 shadow-soft hover:shadow-lifted transition-all duration-500 h-full overflow-hidden"
+      className={`glass-card p-10 rounded-[2.5rem] flex flex-col h-full group hover:shadow-2xl transition-all duration-500 relative overflow-hidden ${isStaggered ? "md:translate-y-12" : ""
+        }`}
     >
       {/* Subtle Aura Hover Effect */}
       <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
       <div className="relative z-10">
-        <div className="mb-8 inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-accent text-primary group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500">
-          {icon}
+        <div className="mb-8 inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-accent text-primary group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500 relative">
+          <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
+          <div className="relative z-10">{icon}</div>
         </div>
 
-        <h3 className="font-serif text-2xl font-medium text-charcoal mb-4 group-hover:text-primary transition-colors duration-300">
+        <h3 className="font-serif text-2xl font-medium text-charcoal mb-4 group-hover:text-neon transition-colors duration-300">
           {title}
         </h3>
 
@@ -60,8 +64,8 @@ const FeatureCard = ({ icon, title, description, stat, statSuffix, statLabel, in
         </p>
 
         {stat !== undefined && (
-          <div className="mt-auto pt-8 border-t border-rose-50">
-            <div className="text-3xl font-bold font-serif text-primary">
+          <div className="mt-auto pt-8 border-t border-primary/10">
+            <div className="text-3xl font-bold font-serif text-neon">
               <NumberCounter value={stat} suffix={statSuffix} />
             </div>
             <div className="text-xs uppercase tracking-[0.2em] text-muted-foreground font-semibold mt-2">{statLabel}</div>
@@ -70,7 +74,9 @@ const FeatureCard = ({ icon, title, description, stat, statSuffix, statLabel, in
       </div>
     </motion.div>
   );
-};
+});
+
+FeatureCard.displayName = "FeatureCard";
 
 const FeatureGrid = () => {
   const features = [
@@ -82,7 +88,7 @@ const FeatureGrid = () => {
     {
       icon: <Camera className="w-6 h-6" />,
       title: "Moments & Gallery",
-      description: "A shared sanctuary for your photos. relive your favorite memories anytime, anywhere.",
+      description: "A shared sanctuary for your photos. Relive your favorite memories anytime, anywhere.",
       stat: 12847,
       statSuffix: "+",
       statLabel: "Moments Shared Today"
@@ -113,7 +119,7 @@ const FeatureGrid = () => {
   ];
 
   return (
-    <section className="py-24 md:py-32 bg-[#FAF8F6]/30">
+    <section className="py-24 md:py-32 bg-background/30">
       <div className="container-tight">
         <div className="text-center mb-16 md:mb-24">
           <motion.div
@@ -148,7 +154,7 @@ const FeatureGrid = () => {
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 pb-12">
           {features.map((feature, index) => (
             <FeatureCard
               key={feature.title}

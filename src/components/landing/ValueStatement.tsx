@@ -2,7 +2,7 @@ import { motion } from "framer-motion";
 
 const ValueStatement = () => {
   return (
-    <section className="py-24 md:py-36 relative z-10 overflow-hidden bg-rose-50/30">
+    <section className="py-24 md:py-36 relative z-10 overflow-hidden bg-background/30">
       <div className="container-tight relative">
 
         <div className="flex flex-col items-center text-center">
