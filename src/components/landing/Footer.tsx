@@ -19,7 +19,7 @@ const Footer = () => {
               <span className="font-serif text-xl text-charcoal font-medium">Between</span>
             </div>
             <p className="text-secondary-foreground text-base leading-relaxed mb-8 max-w-xs">
-              The world's most loved app for couples. Building space for your sanctuary since 2011.
+              The world's most loved app for couples. Building space for your sanctuary since 2026.
             </p>
             <div className="flex items-center gap-4">
               <a href="#" className="w-10 h-10 rounded-full bg-accent flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all duration-300">

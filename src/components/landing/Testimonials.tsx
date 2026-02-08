@@ -70,6 +70,7 @@ const Testimonials = () => {
           <button
             onClick={prevSlide}
             className="hidden md:flex flex-none w-12 h-12 rounded-full bg-white border border-[#EAE8E4] items-center justify-center hover:bg-[#FAF8F6] hover:border-[#CD848C]/30 transition-all shadow-sm z-20"
+            aria-label="Previous testimonial"
           >
             <ChevronLeft className="w-5 h-5 opacity-60" />
           </button>
@@ -119,6 +120,7 @@ const Testimonials = () => {
           <button
             onClick={nextSlide}
             className="hidden md:flex flex-none w-12 h-12 rounded-full bg-white border border-[#EAE8E4] items-center justify-center hover:bg-[#FAF8F6] hover:border-[#CD848C]/30 transition-all shadow-sm z-20"
+            aria-label="Next testimonial"
           >
             <ChevronRight className="w-5 h-5 opacity-60" />
           </button>
@@ -130,9 +132,10 @@ const Testimonials = () => {
             <button
               key={idx}
               onClick={() => setActiveIndex(idx)}
+              aria-label={`Go to testimonial ${idx + 1}`}
               className={`transition-all duration-300 rounded-full ${idx === activeIndex
-                  ? "w-8 h-1.5 bg-[#CD848C]"
-                  : "w-1.5 h-1.5 bg-[#EAE8E4] hover:bg-[#D4C5C5]"
+                ? "w-8 h-1.5 bg-[#CD848C]"
+                : "w-1.5 h-1.5 bg-[#EAE8E4] hover:bg-[#D4C5C5]"
                 }`}
             />
           ))}

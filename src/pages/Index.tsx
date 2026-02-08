@@ -3,6 +3,7 @@ import Header from "@/components/landing/Header";
 import Hero from "@/components/landing/Hero";
 import ValueStatement from "@/components/landing/ValueStatement";
 import FeatureGrid from "@/components/landing/FeatureGrid";
+import DataInsights2026 from "@/components/landing/DataInsights2026";
 import GettingStarted from "@/components/landing/GettingStarted";
 import PrivacyTrust from "@/components/landing/PrivacyTrust";
 import FAQ from "@/components/landing/FAQ";
@@ -19,6 +20,7 @@ const Index = () => {
       <main className="relative z-10">
         <Hero />
         <ValueStatement />
+        <DataInsights2026 />
         <div id="features">
           <FeatureGrid />
         </div>

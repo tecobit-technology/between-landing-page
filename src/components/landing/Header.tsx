@@ -106,6 +106,7 @@ const Header = () => {
               <button
                 onClick={(e) => scrollToSection(e, "#download")}
                 className="btn-primary w-full mt-4"
+                aria-label="Get Started"
               >
                 Get Started
               </button>

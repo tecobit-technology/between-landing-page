@@ -1,31 +1,41 @@
-import { Plus } from "lucide-react";
+import { Plus, Minus } from "lucide-react";
 import { useState } from "react";
+import { motion, AnimatePresence } from "framer-motion";
 
 const FAQItem = ({ question, answer }: { question: string; answer: string }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="border-b border-[#EAE8E4]">
+    <div className="border-b border-rose-100 last:border-0">
       <button
-        className="w-full py-6 flex items-center justify-between text-left focus:outline-none group"
+        className="w-full py-8 flex items-center justify-between text-left focus:outline-none group"
         onClick={() => setIsOpen(!isOpen)}
+        aria-expanded={isOpen}
+        aria-label={`${isOpen ? "Close" : "Open"} question: ${question}`}
       >
-        <span className="font-serif text-lg text-[#3A3535] group-hover:text-[#CD848C] transition-colors">
+        <span className={`font-serif text-xl md:text-2xl transition-colors duration-300 ${isOpen ? "text-primary" : "text-charcoal group-hover:text-primary"}`}>
           {question}
         </span>
-        <span className={`transition-transform duration-300 ${isOpen ? "rotate-45 text-[#CD848C]" : "text-[#9A9595]"}`}>
-          <Plus className="w-5 h-5" />
+        <span className={`flex-none w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${isOpen ? "bg-primary text-white rotate-0" : "bg-accent text-primary group-hover:bg-primary group-hover:text-white"}`}>
+          {isOpen ? <Minus className="w-5 h-5" /> : <Plus className="w-5 h-5" />}
         </span>
       </button>
 
-      <div
-        className={`overflow-hidden transition-all duration-300 ease-in-out ${isOpen ? "max-h-40 opacity-100 pb-6" : "max-h-0 opacity-0"
-          }`}
-      >
-        <p className="text-[#8A8585] leading-relaxed">
-          {answer}
-        </p>
-      </div>
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.4, ease: "easeInOut" }}
+            className="overflow-hidden"
+          >
+            <p className="text-secondary-foreground text-lg leading-relaxed pb-8 max-w-2xl px-1">
+              {answer}
+            </p>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
@@ -34,35 +44,43 @@ const FAQ = () => {
   const faqs = [
     {
       q: "Is Between really free?",
-      a: "Yes, the core features of Between are completely free. We offer a Premium subscription for cloud backup and extra themes."
+      a: "Yes, the core features of Between are completely free. We offer a Premium subscription for cloud backup, extra themes, and unlimited high-res storage."
+    },
+    {
+      q: "How secure is my data?",
+      a: "Between uses industry-standard encryption for all data transport and storage. Your private messages and photos are secure and encrypted so only you and your partner can see them."
     },
     {
       q: "Can I use it on multiple devices?",
-      a: "Currently, Between is designed to be on your primary phone to ensure maximum security, but tablet support is coming soon."
+      a: "Between is currently optimized for primary mobile devices to maintain a secure one-to-one connection. Tablet and desktop web versions are available for shared access."
     },
     {
-      q: "What happens if we break up?",
-      a: "You can disconnect at any time. You'll have the option to export your shared data or permanently delete it."
-    },
-    {
-      q: "Is my data sold to advertisers?",
-      a: "Never. Our business model is subscription-based, not ad-based. You are our customer, not our product."
+      q: "What happens if we disconnect?",
+      a: "If you decide to disconnect your account, all shared data is archived. You can request a data export or choose to permanently delete your history at any time."
     }
   ];
 
   return (
-    <section className="py-24 relative z-10">
-      <div className="container-tight max-w-3xl">
-        <div className="text-center mb-12">
-          <span className="text-[#CD848C] font-bold tracking-[0.2em] uppercase text-xs mb-4 block">
-            FAQ
-          </span>
-          <h2 className="font-serif text-3xl md:text-5xl text-[#3A3535]">
-            Common Questions
+    <section className="py-24 md:py-32 relative z-10 bg-white">
+      <div className="container-tight max-w-4xl">
+        <div className="text-center mb-16 md:mb-20">
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="flex justify-center items-center gap-2 mb-4"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+            <span className="text-primary font-bold tracking-[0.3em] uppercase text-xs">
+              SUPPORT
+            </span>
+          </motion.div>
+          <h2 className="heading-section text-charcoal">
+            Common questions
           </h2>
         </div>
 
-        <div className="flex flex-col">
+        <div className="flex flex-col bg-accent/30 rounded-[3rem] p-8 md:p-12 border border-rose-100/50">
           {faqs.map((faq, i) => (
             <FAQItem key={i} question={faq.q} answer={faq.a} />
           ))}

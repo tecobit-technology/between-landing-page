@@ -18,8 +18,8 @@ const ThreeCanvas = () => {
             if (!container) return;
 
             scene = new THREE.Scene();
-            // Soft pinkish fog to blend with the background
-            scene.fog = new THREE.FogExp2(0xfaf5f7, 0.001);
+            // Soft pinkish fog to blend with the background (matching --background: 30 20% 98% -> #faf8f6)
+            scene.fog = new THREE.FogExp2(0xfaf8f6, 0.001);
 
             camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 1, 1000);
             const isMobile = window.innerWidth < 768;

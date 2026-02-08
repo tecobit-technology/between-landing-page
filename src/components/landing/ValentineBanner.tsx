@@ -1,45 +1,57 @@
 import { Heart, Gift, Sparkles } from "lucide-react";
+import { motion } from "framer-motion";
 
 const ValentineBanner = () => {
   return (
-    <section className="py-12 md:py-16 relative z-10">
+    <section className="py-16 md:py-24 relative z-10">
       <div className="container-tight">
-        <div className="relative overflow-hidden rounded-[2.5rem] bg-[#CD848C] shadow-2xl shadow-[#CD848C]/20 p-8 md:p-16">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="relative overflow-hidden rounded-[3rem] bg-gradient-to-br from-primary to-primary/80 shadow-2xl shadow-primary/20 p-10 md:p-20"
+        >
 
           {/* Decorative floating icons */}
-          <Heart className="absolute top-10 right-10 text-white/20 w-12 h-12 -rotate-12" />
-          <Heart className="absolute bottom-10 left-10 text-white/20 w-8 h-8 rotate-12" />
-          <Sparkles className="absolute top-1/3 left-1/4 text-white/20 w-6 h-6 animate-pulse" />
+          <Heart className="absolute top-10 right-10 text-white/10 w-16 h-16 -rotate-12" />
+          <Heart className="absolute bottom-10 left-10 text-white/10 w-12 h-12 rotate-12" />
+          <Sparkles className="absolute top-1/3 left-1/4 text-white/10 w-8 h-8 animate-pulse" />
 
-          <div className="relative z-10 flex flex-col items-center md:items-start md:flex-row justify-between gap-10">
+          <div className="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-12">
 
-            <div className="text-center md:text-left max-w-xl">
+            <div className="text-center lg:text-left max-w-2xl">
               {/* Badge */}
-              <div className="inline-flex items-center gap-2 bg-white/10 backdrop-blur-sm rounded-full px-4 py-1.5 mb-6 border border-white/20">
-                <Gift className="w-3.5 h-3.5 text-white" />
-                <span className="text-white text-xs font-semibold tracking-wide uppercase">Valentine's Special</span>
+              <div className="inline-flex items-center gap-2 bg-white/20 backdrop-blur-md rounded-full px-5 py-2 mb-8 border border-white/30">
+                <Gift className="w-4 h-4 text-white fill-current" />
+                <span className="text-white text-xs font-bold tracking-[0.2em] uppercase">Valentine's Special</span>
               </div>
 
-              <h2 className="font-serif text-3xl md:text-5xl text-white mb-4 leading-tight">
+              <h2 className="font-serif text-4xl md:text-6xl text-white mb-6 leading-tight font-medium">
                 Love deserves a <br />
-                <span className="italic">beautiful beginning</span>
+                <span className="italic font-serif-italic opacity-90">beautiful beginning</span>
               </h2>
 
-              <p className="text-white/90 text-lg font-medium leading-relaxed max-w-md">
-                Start your Between journey this Valentine's Day with 3 months of Premium—free.
+              <p className="text-white/80 text-lg md:text-xl font-medium leading-relaxed max-w-lg">
+                Start your Between journey this Valentine's Day with 3 months of Premium—completely free.
               </p>
             </div>
 
-            <div className="flex flex-col items-center gap-3 min-w-max">
-              <button className="bg-white text-[#CD848C] rounded-full px-8 py-4 font-bold text-base transition-all duration-300 hover:bg-[#FAF8F6] hover:scale-105 shadow-lg">
+            <div className="flex flex-col items-center gap-4 min-w-max">
+              <motion.button
+                whileHover={{ scale: 1.05, y: -4 }}
+                whileTap={{ scale: 0.98 }}
+                className="bg-white text-primary rounded-2xl px-12 py-5 font-bold text-lg transition-all duration-300 shadow-xl hover:shadow-white/20"
+              >
                 Claim Your Gift
-              </button>
-              <span className="text-white/70 text-xs font-medium tracking-wide uppercase">
-                Offer ends February 14th
-              </span>
+              </motion.button>
+              <div className="flex items-center gap-2 text-white/60 text-xs font-bold tracking-[0.15em] uppercase">
+                <span className="w-2 h-2 rounded-full bg-white/40 animate-pulse" />
+                OFFER ENDS FEB 14
+              </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </div>
     </section>
   );
