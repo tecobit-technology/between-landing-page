@@ -38,17 +38,17 @@ const Testimonials = () => {
   };
 
   return (
-    <section className="py-24 md:py-32 bg-background/30">
+    <section className="py-16 md:py-32 bg-background/30">
       <div className="container-tight max-w-5xl">
 
         {/* Header */}
-        <div className="text-center mb-16">
+        <div className="text-center mb-10 md:mb-16">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
-            className="font-serif text-4xl md:text-5xl text-charcoal mb-4"
+            className="font-serif text-3xl md:text-5xl text-charcoal mb-4"
           >
             What Our Users Say
           </motion.h2>
@@ -57,7 +57,7 @@ const Testimonials = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-secondary-foreground text-lg font-sans"
+            className="text-secondary-foreground text-base md:text-lg font-sans px-4"
           >
             Stories from couples who found their quiet space
           </motion.p>

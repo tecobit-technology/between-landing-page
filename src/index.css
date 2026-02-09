@@ -132,15 +132,15 @@
 
   /* Fluid Typography */
   h1 {
-    font-size: clamp(3rem, 8vw + 1rem, 8rem);
+    font-size: clamp(2.5rem, 8vw + 1rem, 8rem);
   }
 
   h2 {
-    font-size: clamp(2.5rem, 5vw + 1rem, 5rem);
+    font-size: clamp(2rem, 5vw + 1rem, 5rem);
   }
 
   h3 {
-    font-size: clamp(2rem, 3vw + 1rem, 3.5rem);
+    font-size: clamp(1.75rem, 3vw + 1rem, 3.5rem);
   }
 }
 
@@ -218,7 +218,7 @@
   }
 
   .container-tight {
-    @apply max-w-6xl mx-auto px-6 md:px-12 lg:px-16;
+    @apply max-w-6xl mx-auto px-4 md:px-12 lg:px-16;
   }
 
   /* Glassmorphism */
@@ -281,6 +281,82 @@
     animation-delay: 0.4s;
     opacity: 0;
   }
+
+  /* Premium Typography Masks */
+  .text-mask {
+    @apply bg-clip-text text-transparent bg-gradient-to-br from-charcoal via-charcoal/80 to-charcoal/40;
+  }
+
+  .text-mask-light {
+    @apply bg-clip-text text-transparent bg-gradient-to-br from-white via-white/80 to-white/60;
+  }
+
+  /* Glassmorphism Refinements */
+  .glass-glow {
+    @apply relative overflow-hidden;
+  }
+
+  .glass-glow::after {
+    content: '';
+    @apply absolute inset-0 bg-gradient-to-tr from-white/10 via-transparent to-transparent pointer-events-none;
+  }
+
+  .perspective-1000 {
+    perspective: 1000px;
+  }
+
+  .animate-pulse-glow {
+    animation: pulse-glow 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+  }
+
+  .animate-pulse-soft {
+    animation: pulse-soft 4s ease-in-out infinite;
+  }
+
+  @keyframes pulse-glow {
+
+    0%,
+    100% {
+      opacity: 0.1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    50% {
+      opacity: 0.2;
+      transform: translate(-50%, -50%) scale(1.1);
+    }
+  }
+
+  @keyframes pulse-soft {
+
+    0%,
+    100% {
+      opacity: 0.4;
+      transform: scale(1);
+    }
+
+    50% {
+      opacity: 0.6;
+      transform: scale(1.05);
+    }
+  }
+
+  .shadow-soft {
+    box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.05);
+  }
+
+  .shadow-glow {
+    box-shadow: 0 0 30px rgba(245, 53, 170, 0.3);
+  }
+}
+
+/* Base Styles Refinement */
+html {
+  scroll-behavior: smooth;
+}
+
+::selection {
+  @apply bg-primary/20 text-charcoal;
 }
 
 @keyframes fadeUp {
@@ -293,4 +369,22 @@
     opacity: 1;
     transform: translateY(0);
   }
+}
+
+@keyframes pulse-border {
+
+  0%,
+  100% {
+    opacity: 0.1;
+    transform: scale(1);
+  }
+
+  50% {
+    opacity: 0.2;
+    transform: scale(1.05);
+  }
+}
+
+.animate-pulse-border {
+  animation: pulse-border 3s cubic-bezier(0.4, 0, 0.6, 1) infinite;
 }

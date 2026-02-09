@@ -63,7 +63,7 @@ const DataInsights2026 = () => {
     ];
 
     return (
-        <section ref={containerRef} className="py-24 md:py-32 relative overflow-hidden bg-background/20">
+        <section ref={containerRef} className="py-16 md:py-32 relative overflow-hidden bg-background/20">
             {/* Decorative Elements */}
             <motion.div
                 style={{ opacity: useTransform(scrollYProgress, [0, 0.5], [0, 1]) }}
@@ -89,7 +89,7 @@ const DataInsights2026 = () => {
                     <h2 className="heading-section text-charcoal mb-6">
                         A year of <span className="font-serif-italic text-primary italic">deeper connection</span>
                     </h2>
-                    <p className="text-secondary-foreground text-lg md:text-xl max-w-2xl mx-auto leading-relaxed">
+                    <p className="text-secondary-foreground text-lg md:text-xl max-w-2xl mx-auto leading-relaxed px-4">
                         In 2026, Between has become more than an app. It's the silent witness to millions of small, sacred moments that define modern love.
                     </p>
                 </motion.div>
@@ -105,7 +105,7 @@ const DataInsights2026 = () => {
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
                     transition={{ duration: 0.8, delay: 0.5 }}
-                    className="mt-20 p-8 md:p-12 rounded-[3.5rem] bg-card border border-primary/10 shadow-soft flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left"
+                    className="mt-16 md:mt-20 p-8 md:p-12 rounded-[2.5rem] md:rounded-[3.5rem] bg-card border border-primary/10 shadow-soft flex flex-col md:flex-row items-center justify-between gap-8 text-center md:text-left"
                 >
                     <div className="max-w-xl">
                         <h3 className="font-serif text-2xl md:text-3xl text-charcoal mb-3 font-medium">Building for the next decade of love</h3>

@@ -61,9 +61,9 @@ const FAQ = () => {
   ];
 
   return (
-    <section className="py-24 md:py-32 relative z-10 bg-background">
+    <section className="py-16 md:py-32 relative z-10 bg-background">
       <div className="container-tight max-w-4xl">
-        <div className="text-center mb-16 md:mb-20">
+        <div className="text-center mb-12 md:mb-20">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -80,7 +80,7 @@ const FAQ = () => {
           </h2>
         </div>
 
-        <div className="flex flex-col bg-accent/30 rounded-[3rem] p-8 md:p-12 border border-primary/10">
+        <div className="flex flex-col bg-accent/30 rounded-[2.5rem] md:rounded-[3rem] p-6 md:p-12 border border-primary/10">
           {faqs.map((faq, i) => (
             <FAQItem key={i} question={faq.q} answer={faq.a} />
           ))}

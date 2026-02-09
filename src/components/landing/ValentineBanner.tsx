@@ -3,14 +3,14 @@ import { motion } from "framer-motion";
 
 const ValentineBanner = () => {
   return (
-    <section className="py-16 md:py-24 relative z-10">
+    <section className="py-12 md:py-24 relative z-10">
       <div className="container-tight">
         <motion.div
           initial={{ opacity: 0, scale: 0.95 }}
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="relative overflow-hidden rounded-[3rem] bg-gradient-to-br from-primary via-primary/90 to-primary/80 shadow-[0_0_60px_rgba(245,53,170,0.3)] p-10 md:p-20 group"
+          className="relative overflow-hidden rounded-[2.5rem] md:rounded-[3rem] bg-gradient-to-br from-primary via-primary/90 to-primary/80 shadow-[0_0_60px_rgba(245,53,170,0.3)] p-8 md:p-20 group"
         >
           {/* Centered Glow Mesh */}
           <div className="glow-mesh w-full h-full inset-0 opacity-40 bg-white/10 blur-[150px]" />
@@ -43,6 +43,13 @@ const ValentineBanner = () => {
               <motion.button
                 whileHover={{ scale: 1.05, y: -4, boxShadow: "0 0 30px rgba(255,255,255,0.4)" }}
                 whileTap={{ scale: 0.98 }}
+                onClick={() => {
+                  const element = document.querySelector("#download");
+                  if (element) {
+                    const offsetTop = element.getBoundingClientRect().top + window.pageYOffset - 80;
+                    window.scrollTo({ top: offsetTop, behavior: "smooth" });
+                  }
+                }}
                 className="bg-white text-primary rounded-2xl px-12 py-5 font-bold text-lg transition-all duration-300 shadow-xl shadow-white/10"
               >
                 Claim Your Gift

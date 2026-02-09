@@ -1,21 +1,21 @@
-import { Lock, EyeOff, ShieldCheck, Apple, Play, Heart } from "lucide-react";
+import { Lock, EyeOff, ShieldCheck, Apple, Play, Heart, Server } from "lucide-react";
 import { motion } from "framer-motion";
 
 const PrivacyTrust = () => {
   return (
-    <section className="py-24 md:py-32 relative overflow-hidden">
+    <section className="py-16 md:py-32 relative overflow-hidden">
       <div className="container-tight">
         <motion.div
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-100px" }}
           transition={{ duration: 0.7, ease: "easeOut" }}
-          className="bg-card rounded-[4rem] p-10 md:p-20 shadow-soft border border-primary/10 relative overflow-hidden"
+          className="bg-card rounded-[2.5rem] md:rounded-[4rem] p-6 sm:p-10 md:p-20 shadow-soft border border-primary/10 relative overflow-hidden"
         >
           {/* Subtle Background Pattern */}
           <div className="absolute top-0 right-0 w-64 h-64 bg-primary/5 blur-3xl rounded-full translate-x-1/2 -translate-y-1/2" />
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-24 items-center relative z-10">
 
             {/* Left Column */}
             <motion.div
@@ -53,7 +53,7 @@ const PrivacyTrust = () => {
               {[
                 { icon: <Lock className="w-6 h-6" />, title: "End-to-End Encrypted", desc: "Your messages are encrypted before they leave your device. Only you two can read them." },
                 { icon: <EyeOff className="w-6 h-6" />, title: "No Third-Party Access", desc: "We don't sell your data. We don't show ads. Your privacy is our only priority." },
-                { icon: <Lock className="w-6 h-6" />, title: "Secure Infrastructure", desc: "Industry-leading security standards protect your shared history and memories forever." }
+                { icon: <Server className="w-6 h-6" />, title: "Secure Infrastructure", desc: "Industry-leading security standards protect your shared history and memories forever." }
               ].map((item, index) => (
                 <motion.div
                   key={index}

@@ -43,7 +43,7 @@ const FeatureCard = memo(({ icon, title, description, stat, statSuffix, statLabe
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ duration: 0.6, delay: index * 0.1 }}
-      className={`glass-card p-10 rounded-[2.5rem] flex flex-col h-full group hover:shadow-2xl transition-all duration-500 relative overflow-hidden ${isStaggered ? "md:translate-y-12" : ""
+      className={`glass-card p-8 md:p-10 rounded-[2.5rem] flex flex-col h-full group hover:shadow-2xl transition-all duration-500 relative overflow-hidden ${isStaggered ? "md:translate-y-12" : ""
         }`}
     >
       {/* Subtle Aura Hover Effect */}
@@ -119,9 +119,9 @@ const FeatureGrid = () => {
   ];
 
   return (
-    <section className="py-24 md:py-32 bg-background/30">
+    <section className="py-16 md:py-32 bg-background/30">
       <div className="container-tight">
-        <div className="text-center mb-16 md:mb-24">
+        <div className="text-center mb-12 md:mb-24">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -138,7 +138,7 @@ const FeatureGrid = () => {
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="heading-section text-charcoal mb-6"
+            className="heading-section text-charcoal mb-4 md:mb-6"
           >
             Beautifully simple <br />
             <span className="font-serif-italic text-secondary-foreground italic text-[0.9em]">for your intentional bond</span>

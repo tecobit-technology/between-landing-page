@@ -23,6 +23,7 @@ const Header = () => {
     { name: "Features", href: "#features" },
     { name: "How It Works", href: "#how-it-works" },
     { name: "Privacy", href: "#privacy" },
+    { name: "Docs", href: "#docs" },
   ];
 
   const scrollToSection = useCallback((e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>, href: string) => {
@@ -47,11 +48,17 @@ const Header = () => {
     >
       <div className="container-tight flex items-center justify-between">
         {/* Logo */}
-        <a href="#" className="flex items-center gap-2 group">
-          <div className="relative w-10 h-10 rounded-xl bg-primary flex items-center justify-center transition-all duration-500 group-hover:rotate-6 group-hover:scale-110 shadow-lg shadow-primary/20">
-            <Heart className="w-5 h-5 text-white fill-current" />
+        <a href="#" className="flex items-center gap-3 group">
+          <div className="relative w-11 h-11 md:w-14 md:h-14 flex-shrink-0 rounded-xl overflow-hidden transition-all duration-500 group-hover:rotate-3 group-hover:scale-105 shadow-lg shadow-primary/20 bg-white">
+            <img
+              src="/logo.jpg"
+              alt="Love Temple"
+              width="56"
+              height="56"
+              className="w-full h-full object-cover"
+            />
           </div>
-          <span className="font-serif text-2xl text-charcoal font-medium">Between</span>
+          <span className="font-sans text-2xl md:text-3xl text-charcoal font-bold tracking-tight">Love Temple</span>
         </a>
 
         {/* Desktop Navigation */}
@@ -73,10 +80,10 @@ const Header = () => {
         <div className="hidden md:flex items-center gap-4">
           <ThemeToggle />
           <button
-            onClick={(e) => scrollToSection(e, "#download")}
+            onClick={(e) => scrollToSection(e as any, "#download")}
             className="btn-primary py-2.5 px-6 text-sm"
           >
-            Get Started
+            Download Now
           </button>
         </div>
 
@@ -113,11 +120,11 @@ const Header = () => {
                 </a>
               ))}
               <button
-                onClick={(e) => scrollToSection(e, "#download")}
+                onClick={(e) => scrollToSection(e as any, "#download")}
                 className="btn-primary w-full mt-4"
-                aria-label="Get Started"
+                aria-label="Download Now"
               >
-                Get Started
+                Download Now
               </button>
             </nav>
           </motion.div>
