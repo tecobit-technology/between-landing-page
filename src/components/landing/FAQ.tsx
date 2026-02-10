@@ -1,6 +1,7 @@
 import { Plus, Minus } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { faqs } from "@/lib/mockData";
 
 const FAQItem = ({ question, answer }: { question: string; answer: string }) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -41,24 +42,8 @@ const FAQItem = ({ question, answer }: { question: string; answer: string }) => 
 };
 
 const FAQ = () => {
-  const faqs = [
-    {
-      q: "Is Between really free?",
-      a: "Yes, the core features of Between are completely free. We offer a Premium subscription for cloud backup, extra themes, and unlimited high-res storage."
-    },
-    {
-      q: "How secure is my data?",
-      a: "Between uses industry-standard encryption for all data transport and storage. Your private messages and photos are secure and encrypted so only you and your partner can see them."
-    },
-    {
-      q: "Can I use it on multiple devices?",
-      a: "Between is currently optimized for primary mobile devices to maintain a secure one-to-one connection. Tablet and desktop web versions are available for shared access."
-    },
-    {
-      q: "What happens if we disconnect?",
-      a: "If you decide to disconnect your account, all shared data is archived. You can request a data export or choose to permanently delete your history at any time."
-    }
-  ];
+  // Data moved to @/lib/mockData
+
 
   return (
     <section className="py-16 md:py-32 relative z-10 bg-background">

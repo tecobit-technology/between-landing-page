@@ -1,6 +1,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import { Sparkles, Heart, ShieldCheck, Users } from "lucide-react";
+import { siteConfig } from "@/lib/mockData";
 
 interface StatProps {
     icon: React.ReactNode;
@@ -45,19 +46,19 @@ const DataInsights2026 = () => {
         {
             icon: <Heart className="w-8 h-8" fill="currentColor" />,
             label: "Shared Moments",
-            value: "52M+",
+            value: siteConfig.stats.sharedMoments,
             delay: 0.1
         },
         {
             icon: <Users className="w-8 h-8" />,
             label: "New Sanctuary Spaces",
-            value: "2.1M+",
+            value: siteConfig.stats.newSanctuaries,
             delay: 0.2
         },
         {
             icon: <ShieldCheck className="w-8 h-8" />,
             label: "Privacy Protection",
-            value: "100%",
+            value: siteConfig.stats.privacyProtection,
             delay: 0.3
         }
     ];
@@ -90,7 +91,7 @@ const DataInsights2026 = () => {
                         A year of <span className="font-serif-italic text-primary italic">deeper connection</span>
                     </h2>
                     <p className="text-secondary-foreground text-lg md:text-xl max-w-2xl mx-auto leading-relaxed px-4">
-                        In 2026, Between has become more than an app. It's the silent witness to millions of small, sacred moments that define modern love.
+                        In 2026, Love Temple has become more than an app. It's the silent witness to millions of small, sacred moments that define modern love.
                     </p>
                 </motion.div>
 

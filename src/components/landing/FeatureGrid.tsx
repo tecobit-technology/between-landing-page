@@ -1,6 +1,19 @@
 import { useRef, useState, useEffect, memo } from "react";
 import { motion, useInView, useSpring, useTransform } from "framer-motion";
-import { MessageCircle, Camera, Sparkles, Heart, Calendar, Lock } from "lucide-react";
+import { MessageCircle, Camera, Sparkles, Heart, Calendar, Lock, Zap, Rocket, Shield } from "lucide-react";
+import { features } from "@/lib/mockData";
+
+const iconMap: Record<string, React.ReactNode> = {
+  MessageCircle: <MessageCircle className="w-6 h-6" />,
+  Camera: <Camera className="w-6 h-6" />,
+  Sparkles: <Sparkles className="w-6 h-6" />,
+  Heart: <Heart className="w-6 h-6" />,
+  Calendar: <Calendar className="w-6 h-6" />,
+  Lock: <Lock className="w-6 h-6" />,
+  Zap: <Zap className="w-6 h-6" />,
+  Rocket: <Rocket className="w-6 h-6" />,
+  Shield: <Shield className="w-6 h-6" />,
+};
 
 interface FeatureCardProps {
   icon: React.ReactNode;
@@ -79,44 +92,8 @@ const FeatureCard = memo(({ icon, title, description, stat, statSuffix, statLabe
 FeatureCard.displayName = "FeatureCard";
 
 const FeatureGrid = () => {
-  const features = [
-    {
-      icon: <MessageCircle className="w-6 h-6" />,
-      title: "Private Couple Chat",
-      description: "Encrypted, intimate, and distraction-free. Your messages belong to just the two of you.",
-    },
-    {
-      icon: <Camera className="w-6 h-6" />,
-      title: "Moments & Gallery",
-      description: "A shared sanctuary for your photos. Relive your favorite memories anytime, anywhere.",
-      stat: 12847,
-      statSuffix: "+",
-      statLabel: "Moments Shared Today"
-    },
-    {
-      icon: <Sparkles className="w-6 h-6" />,
-      title: "Daily Prompts",
-      description: "Thoughtful questions to spark deeper conversations and meaningful connections every day.",
-    },
-    {
-      icon: <Heart className="w-6 h-6" />,
-      title: "Thinking of You",
-      description: "Send a gentle notification to let your partner know they're on your mind with a single tap.",
-    },
-    {
-      icon: <Calendar className="w-6 h-6" />,
-      title: "Journey Journal",
-      description: "Celebrate milestones and track your growth as a couple with a beautiful shared timeline.",
-      stat: 847,
-      statSuffix: "+",
-      statLabel: "Average Days Connected"
-    },
-    {
-      icon: <Lock className="w-6 h-6" />,
-      title: "Privacy First",
-      description: "End-to-end encryption and no data selling. Your relationship is private, as it should be.",
-    },
-  ];
+  // Data moved to @/lib/mockData
+
 
   return (
     <section className="py-16 md:py-32 bg-background/30">
@@ -150,7 +127,7 @@ const FeatureGrid = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="text-secondary-foreground text-lg max-w-2xl mx-auto leading-relaxed"
           >
-            Between brings you closer with features that matter, and leaves out everything that doesn't.
+            Love Temple brings you closer with features that matter, and leaves out everything that doesn't.
           </motion.p>
         </div>
 
@@ -159,6 +136,7 @@ const FeatureGrid = () => {
             <FeatureCard
               key={feature.title}
               {...feature}
+              icon={iconMap[feature.iconName as keyof typeof iconMap]}
               index={index}
             />
           ))}

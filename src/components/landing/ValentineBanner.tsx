@@ -35,7 +35,7 @@ const ValentineBanner = () => {
               </h2>
 
               <p className="text-white/80 text-lg md:text-xl font-medium leading-relaxed max-w-lg">
-                Start your Between journey this Valentine's Day with 3 months of Premium—completely free.
+                Start your Love Temple journey this Valentine's Day with 3 months of Premium—completely free.
               </p>
             </div>
 

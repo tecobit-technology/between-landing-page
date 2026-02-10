@@ -22,7 +22,7 @@ const ValueStatement = () => {
             className="font-serif text-3xl md:text-5xl lg:text-6xl text-charcoal leading-tight max-w-4xl mb-12"
           >
             "In a world screaming for attention, <br className="hidden md:block" />
-            <span className="font-serif-italic text-primary italic">Between</span> offers a quiet place to listen."
+            <span className="font-serif-italic text-primary italic">Love Temple</span> offers a quiet place to listen."
           </motion.h2>
 
           <motion.div

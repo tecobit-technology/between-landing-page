@@ -1,5 +1,6 @@
 import { Apple, Play, Heart, Sparkles, ShieldCheck } from "lucide-react";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 const DownloadCTA = () => {
   return (
@@ -63,29 +64,37 @@ const DownloadCTA = () => {
           transition={{ duration: 0.6, delay: 0.4 }}
           className="flex flex-col sm:flex-row gap-6 justify-center items-center"
         >
-          <motion.button
+          <motion.div
             whileHover={{ scale: 1.05, y: -5 }}
             whileTap={{ scale: 0.98 }}
-            className="flex items-center gap-6 glass-card border-none bg-charcoal text-white rounded-[2rem] px-10 py-6 transition-all duration-500 hover:shadow-glow hover:bg-black w-full sm:w-auto min-w-[280px]"
           >
-            <Apple className="w-10 h-10" />
-            <div className="text-left">
-              <div className="text-[10px] font-bold uppercase tracking-[0.3em] opacity-50 mb-1 leading-none">Download on</div>
-              <div className="font-serif text-2xl leading-none">App Store</div>
-            </div>
-          </motion.button>
+            <Link
+              to="/signup"
+              className="flex items-center gap-6 glass-card border-none bg-charcoal text-white rounded-[2rem] px-10 py-6 transition-all duration-500 hover:shadow-glow hover:bg-black w-full sm:w-auto min-w-[280px]"
+            >
+              <Apple className="w-10 h-10" />
+              <div className="text-left">
+                <div className="text-[10px] font-bold uppercase tracking-[0.3em] opacity-50 mb-1 leading-none">Download on</div>
+                <div className="font-serif text-2xl leading-none">App Store</div>
+              </div>
+            </Link>
+          </motion.div>
 
-          <motion.button
+          <motion.div
             whileHover={{ scale: 1.05, y: -5 }}
             whileTap={{ scale: 0.98 }}
-            className="flex items-center gap-6 glass-card border-2 border-primary/20 text-charcoal rounded-[2rem] px-10 py-6 transition-all duration-500 hover:border-primary w-full sm:w-auto min-w-[280px]"
           >
-            <Play className="w-10 h-10 text-primary" fill="currentColor" />
-            <div className="text-left">
-              <div className="text-[10px] font-bold uppercase tracking-[0.3em] opacity-40 mb-1 leading-none">Get it on</div>
-              <div className="font-serif text-2xl leading-none">Google Play</div>
-            </div>
-          </motion.button>
+            <Link
+              to="/signup"
+              className="flex items-center gap-6 glass-card border-2 border-primary/20 text-charcoal rounded-[2rem] px-10 py-6 transition-all duration-500 hover:border-primary w-full sm:w-auto min-w-[280px]"
+            >
+              <Play className="w-10 h-10 text-primary" fill="currentColor" />
+              <div className="text-left">
+                <div className="text-[10px] font-bold uppercase tracking-[0.3em] opacity-40 mb-1 leading-none">Get it on</div>
+                <div className="font-serif text-2xl leading-none">Google Play</div>
+              </div>
+            </Link>
+          </motion.div>
         </motion.div>
 
         {/* Safe Badge */}

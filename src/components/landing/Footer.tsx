@@ -1,4 +1,6 @@
-import { Heart, Instagram, Twitter, MessageCircle } from "lucide-react";
+import { Instagram, Twitter, MessageCircle } from "lucide-react";
+import { Link } from "react-router-dom";
+import { siteConfig, footerNavigation } from "@/lib/mockData";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
@@ -12,14 +14,14 @@ const Footer = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 md:gap-12 mb-12 md:mb-20">
           {/* Brand Column */}
           <div className="lg:col-span-1">
-            <div className="flex items-center gap-3 mb-6 group cursor-pointer w-fit">
+            <Link to="/" className="flex items-center gap-3 mb-6 group cursor-pointer w-fit">
               <div className="relative w-10 h-10 rounded-lg overflow-hidden shadow-lg shadow-primary/20 transition-transform duration-500 group-hover:rotate-3 bg-white">
-                <img src="/logo.jpg" alt="Love Temple" className="w-full h-full object-cover" />
+                <img src="/logo.jpg" alt={siteConfig.name} className="w-full h-full object-cover" />
               </div>
-              <span className="font-sans text-xl text-charcoal font-bold tracking-tight">Love Temple</span>
-            </div>
+              <span className="font-sans text-xl text-charcoal font-bold tracking-tight">{siteConfig.name}</span>
+            </Link>
             <p className="text-secondary-foreground text-base leading-relaxed mb-8 max-w-xs">
-              The world's most loved app for couples. Building space for your sanctuary since 2026.
+              {siteConfig.description}
             </p>
             <div className="flex items-center gap-4">
               <a href="#" className="w-10 h-10 rounded-full bg-accent flex items-center justify-center text-primary hover:bg-primary hover:text-white transition-all duration-300">
@@ -38,36 +40,52 @@ const Footer = () => {
           <div>
             <h4 className="font-serif text-lg font-bold text-charcoal mb-4 md:mb-6">Product</h4>
             <ul className="space-y-1">
-              <li><a href="#features" className="block py-2 text-secondary-foreground hover:text-primary transition-colors">Features</a></li>
-              <li><a href="#" className="block py-2 text-secondary-foreground hover:text-primary transition-colors">Premium</a></li>
-              <li><a href="#" className="block py-2 text-secondary-foreground hover:text-primary transition-colors">Safety</a></li>
-              <li><a href="#" className="block py-2 text-secondary-foreground hover:text-primary transition-colors">Help Center</a></li>
+              {footerNavigation.product.map((link) => (
+                <li key={link.name}>
+                  <Link to={link.href} className="block py-2 text-secondary-foreground hover:text-primary transition-colors">
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
           <div>
             <h4 className="font-serif text-lg font-bold text-charcoal mb-4 md:mb-6">Company</h4>
             <ul className="space-y-1">
-              <li><a href="#" className="block py-2 text-secondary-foreground hover:text-primary transition-colors">About Us</a></li>
-              <li><a href="#" className="block py-2 text-secondary-foreground hover:text-primary transition-colors">Careers</a></li>
-              <li><a href="#" className="block py-2 text-secondary-foreground hover:text-primary transition-colors">Press</a></li>
+              {footerNavigation.company.map((link) => (
+                <li key={link.name}>
+                  <a href={link.href} className="block py-2 text-secondary-foreground hover:text-primary transition-colors">
+                    {link.name}
+                  </a>
+                </li>
+              ))}
             </ul>
           </div>
 
           <div>
             <h4 className="font-serif text-lg font-bold text-charcoal mb-4 md:mb-6">Privacy</h4>
             <ul className="space-y-1">
-              <li><a href="#" className="block py-2 text-secondary-foreground hover:text-primary transition-colors">Privacy Policy</a></li>
-              <li><a href="#" className="block py-2 text-secondary-foreground hover:text-primary transition-colors">Terms of Service</a></li>
-              <li><a href="#" className="block py-2 text-secondary-foreground hover:text-primary transition-colors">Cookie Policy</a></li>
-              <li><a href="#" className="block py-2 text-secondary-foreground hover:text-primary transition-colors">Settings</a></li>
+              {footerNavigation.privacy.map((link) => (
+                <li key={link.name}>
+                  {link.href.startsWith('/') ? (
+                    <Link to={link.href} className="block py-2 text-secondary-foreground hover:text-primary transition-colors">
+                      {link.name}
+                    </Link>
+                  ) : (
+                    <a href={link.href} className="block py-2 text-secondary-foreground hover:text-primary transition-colors">
+                      {link.name}
+                    </a>
+                  )}
+                </li>
+              ))}
             </ul>
           </div>
         </div>
 
         <div className="pt-8 border-t border-primary/5 flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-muted-foreground text-sm">
-            &copy; {currentYear} Love Temple Inc. All rights reserved. Made with love for couples.
+            &copy; {currentYear !== 2026 ? `2026-${currentYear}` : "2026"} {siteConfig.name} Inc. All rights reserved. Made with love for couples.
           </p>
           <div className="flex items-center gap-6">
             <span className="text-xs uppercase tracking-[0.2em] text-muted-foreground font-semibold">Privacy First</span>

@@ -37,7 +37,7 @@ const PrivacyTrust = () => {
               </h2>
 
               <p className="text-secondary-foreground text-lg leading-relaxed mb-10">
-                Between is built on a foundation of trust. We believe the most intimate parts of your relationship deserve the highest level of protection—and that's exactly what we provide.
+                Love Temple is built on a foundation of trust. We believe the most intimate parts of your relationship deserve the highest level of protection—and that's exactly what we provide.
               </p>
 
               <div className="flex items-center gap-4 p-4 rounded-2xl bg-accent/50 border border-primary/10 w-fit">

@@ -1,33 +1,12 @@
 import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { testimonials } from "@/lib/mockData";
 
 const Testimonials = () => {
   const [activeIndex, setActiveIndex] = useState(0);
 
-  const testimonials = [
-    {
-      quote: "Works perfectly on my phone and laptop. I love how responsive and fast it feels.",
-      subtext: "Even on slow internet, the app performs well. The mobile experience is especially impressive.",
-      author: "David P.",
-      role: "Student",
-      initials: "DP"
-    },
-    {
-      quote: "It feels like we have our own little world again. Social media was making us distant, but Between brought the intimacy back.",
-      subtext: "We use the shared gallery every day to document our small moments.",
-      author: "Sarah & Tom",
-      role: "Together 3 years",
-      initials: "S&T"
-    },
-    {
-      quote: "The daily prompts spark conversations we wouldn't have otherwise. It's become our favorite nightly ritual.",
-      subtext: "Highly recommend for long-distance couples looking to stay connected.",
-      author: "Emily R.",
-      role: "Artist",
-      initials: "ER"
-    }
-  ];
+  // Data moved to @/lib/mockData
 
   const nextSlide = () => {
     setActiveIndex((prev) => (prev + 1) % testimonials.length);

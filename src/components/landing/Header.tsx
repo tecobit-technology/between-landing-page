@@ -1,11 +1,14 @@
 import { useState, useEffect, useCallback } from "react";
 import { Menu, X, Heart } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Link, useLocation } from "react-router-dom";
+import { siteConfig } from "@/lib/mockData";
 import ThemeToggle from "./ThemeToggle";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const location = useLocation();
 
   useEffect(() => {
     const handleScroll = () => {
@@ -20,10 +23,10 @@ const Header = () => {
   }, [isScrolled]);
 
   const navLinks = [
-    { name: "Features", href: "#features" },
-    { name: "How It Works", href: "#how-it-works" },
-    { name: "Privacy", href: "#privacy" },
-    { name: "Docs", href: "#docs" },
+    { name: "Features", href: "/features" },
+    { name: "How It Works", href: "/how-it-works" },
+    { name: "Privacy", href: "/privacy" },
+    { name: "Docs", href: "/docs" },
   ];
 
   const scrollToSection = useCallback((e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>, href: string) => {
@@ -48,43 +51,43 @@ const Header = () => {
     >
       <div className="container-tight flex items-center justify-between">
         {/* Logo */}
-        <a href="#" className="flex items-center gap-3 group">
+        <Link to="/" className="flex items-center gap-3 group">
           <div className="relative w-11 h-11 md:w-14 md:h-14 flex-shrink-0 rounded-xl overflow-hidden transition-all duration-500 group-hover:rotate-3 group-hover:scale-105 shadow-lg shadow-primary/20 bg-white">
             <img
               src="/logo.jpg"
-              alt="Love Temple"
+              alt={siteConfig.name}
               width="56"
               height="56"
               className="w-full h-full object-cover"
             />
           </div>
-          <span className="font-sans text-2xl md:text-3xl text-charcoal font-bold tracking-tight">Love Temple</span>
-        </a>
+          <span className="font-sans text-2xl md:text-3xl text-charcoal font-bold tracking-tight">{siteConfig.name}</span>
+        </Link>
 
         {/* Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-10">
           {navLinks.map((link) => (
-            <a
+            <Link
               key={link.name}
-              href={link.href}
-              onClick={(e) => scrollToSection(e, link.href)}
-              className="text-sm font-semibold text-secondary-foreground hover:text-primary transition-colors relative group"
+              to={link.href}
+              className={`text-sm font-semibold transition-colors relative group ${location.pathname === link.href ? "text-primary" : "text-secondary-foreground hover:text-primary"
+                }`}
             >
               {link.name}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-primary transition-all duration-300 group-hover:w-full" />
-            </a>
+              <span className={`absolute -bottom-1 left-0 h-0.5 bg-primary transition-all duration-300 ${location.pathname === link.href ? "w-full" : "w-0 group-hover:w-full"
+                }`} />
+            </Link>
           ))}
         </nav>
 
-        {/* CTA Button & Theme Toggle */}
         <div className="hidden md:flex items-center gap-4">
           <ThemeToggle />
-          <button
-            onClick={(e) => scrollToSection(e as any, "#download")}
+          <Link
+            to="/signup"
             className="btn-primary py-2.5 px-6 text-sm"
           >
             Download Now
-          </button>
+          </Link>
         </div>
 
         <div className="flex md:hidden items-center gap-4">
@@ -110,22 +113,23 @@ const Header = () => {
           >
             <nav className="flex flex-col p-6 gap-4">
               {navLinks.map((link) => (
-                <a
+                <Link
                   key={link.name}
-                  href={link.href}
-                  className="text-charcoal py-3 text-lg font-medium border-b border-primary/5"
-                  onClick={(e) => scrollToSection(e, link.href)}
+                  to={link.href}
+                  className={`py-3 text-lg font-medium border-b border-primary/5 transition-colors ${location.pathname === link.href ? "text-primary" : "text-charcoal"
+                    }`}
+                  onClick={() => setIsMobileMenuOpen(false)}
                 >
                   {link.name}
-                </a>
+                </Link>
               ))}
-              <button
-                onClick={(e) => scrollToSection(e as any, "#download")}
-                className="btn-primary w-full mt-4"
-                aria-label="Download Now"
+              <Link
+                to="/signup"
+                className="btn-primary w-full mt-4 text-center"
+                onClick={() => setIsMobileMenuOpen(false)}
               >
                 Download Now
-              </button>
+              </Link>
             </nav>
           </motion.div>
         )}

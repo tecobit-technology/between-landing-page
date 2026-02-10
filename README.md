@@ -1,8 +1,8 @@
-# Between - A Quiet Space for Two
+# Love Temple - A Quiet Space for Two
 
-![Between Hero](public/assets/hero-illustration.png)
+![Love Temple Hero](public/assets/hero-illustration.png)
 
-**Between** is a private digital sanctuary for couples. This landing page is designed with a "Soft Romantic" aesthetic, focusing on intimacy, calmness, and connection.
+**Love Temple** is a private digital sanctuary for couples. This landing page is designed with a "Soft Romantic" aesthetic, focusing on intimacy, calmness, and connection.
 
 ## 🌸 Design Philosophy: "Soft Romantic"
 
@@ -35,7 +35,7 @@ This project is built with a modern React stack optimized for performance and vi
 1.  **Clone the repository**
     ```sh
     git clone <YOUR_REPO_URL>
-    cd between-landing-page
+    cd love-temple-landing-page
     ```
 
 2.  **Install dependencies**
@@ -68,4 +68,4 @@ This project is built with a modern React stack optimized for performance and vi
 
 ---
 
-© 2024 Between Inc. Made with ♥ for love.
+© 2026 Love Temple Inc. Made with ♥ for love.

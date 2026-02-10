@@ -1,5 +1,7 @@
 import { motion } from "framer-motion";
 import { Heart, MessageCircle, Sparkles, Shield, UserCheck } from "lucide-react";
+import { Link } from "react-router-dom";
+import { siteConfig } from "@/lib/mockData";
 
 const Hero = () => {
 
@@ -79,41 +81,27 @@ const Hero = () => {
           transition={{ duration: 0.8, delay: 0.4 }}
           className="text-base md:text-xl text-secondary-foreground max-w-2xl mx-auto mb-12 md:mb-16 leading-relaxed font-medium opacity-80 px-2"
         >
-          Your intimate digital sanctuary. Close the door to the world and open
-          a window to each other. Secure, encrypted, and distraction-free.
+          {siteConfig.description}
         </motion.p>
 
-        {/* Buttons */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.6 }}
           className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center mb-24 md:mb-32 w-full max-w-md mx-auto sm:max-w-none"
         >
-          <button
-            onClick={() => {
-              const element = document.querySelector("#download");
-              if (element) {
-                const offsetTop = element.getBoundingClientRect().top + window.pageYOffset - 80;
-                window.scrollTo({ top: offsetTop, behavior: "smooth" });
-              }
-            }}
-            className="btn-primary w-full sm:w-auto sm:min-w-[220px] shadow-glow active:scale-[0.98] transition-all"
+          <Link
+            to="/signup"
+            className="btn-primary w-full sm:w-auto sm:min-w-[220px] shadow-glow active:scale-[0.98] transition-all text-center"
           >
             Download Now
-          </button>
-          <button
-            className="btn-secondary w-full sm:w-auto sm:min-w-[200px] border-primary/5 active:scale-[0.98] transition-all"
-            onClick={() => {
-              const element = document.querySelector("#features");
-              if (element) {
-                const offsetTop = element.getBoundingClientRect().top + window.pageYOffset - 80;
-                window.scrollTo({ top: offsetTop, behavior: "smooth" });
-              }
-            }}
+          </Link>
+          <Link
+            to="/features"
+            className="btn-secondary w-full sm:w-auto sm:min-w-[200px] border-primary/5 active:scale-[0.98] transition-all text-center flex items-center justify-center"
           >
             Explore Features
-          </button>
+          </Link>
         </motion.div>
 
         {/* Phone Mockup Animation */}

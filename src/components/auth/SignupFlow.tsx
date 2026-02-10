@@ -67,7 +67,7 @@ const SignupFlow = () => {
     };
 
 
-    const renderHeader = (title: string = "Between") => (
+    const renderHeader = (title: string = "Love Temple") => (
         <div className="flex flex-col items-center gap-2 mb-12">
             <div className="w-16 h-16 rounded-full bg-[#FDF2F2] flex items-center justify-center mb-2">
                 <Heart className="w-8 h-8 text-[#D4B4B4] fill-current" />
@@ -93,7 +93,7 @@ const SignupFlow = () => {
                             exit={{ opacity: 0, x: -20 }}
                             className="flex flex-col items-center text-center w-full"
                         >
-                            {renderHeader("Between")}
+                            {renderHeader("Love Temple")}
 
                             <div className="w-12 h-12 rounded-full bg-[#F3F4F6] flex items-center justify-center mb-6">
                                 <Mail className="w-6 h-6 text-[#A1A1A1]" />
@@ -134,7 +134,7 @@ const SignupFlow = () => {
                             exit={{ opacity: 0, x: -20 }}
                             className="flex flex-col items-center text-center w-full"
                         >
-                            {renderHeader("Between")}
+                            {renderHeader("Love Temple")}
 
                             <div className="w-12 h-12 rounded-full bg-[#F3F4F6] flex items-center justify-center mb-6">
                                 <Mail className="w-6 h-6 text-[#A1A1A1]" />
@@ -179,7 +179,7 @@ const SignupFlow = () => {
                             exit={{ opacity: 0, x: -20 }}
                             className="flex flex-col items-center text-center w-full"
                         >
-                            {renderHeader("LoveTemple")}
+                            {renderHeader("Love Temple")}
 
                             <div className="w-12 h-12 rounded-full bg-[#F3F4F6] flex items-center justify-center mb-6">
                                 <Lock className="w-6 h-6 text-[#A1A1A1]" />
@@ -247,7 +247,7 @@ const SignupFlow = () => {
                             exit={{ opacity: 0, x: -20 }}
                             className="flex flex-col items-center text-center w-full"
                         >
-                            {renderHeader("LoveTemple")}
+                            {renderHeader("Love Temple")}
 
                             <div className="w-12 h-12 rounded-full bg-[#F3F4F6] flex items-center justify-center mb-6">
                                 <User className="w-6 h-6 text-[#A1A1A1]" />
