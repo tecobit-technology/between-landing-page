@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { CheckCircle2, Heart, Share2, ShieldCheck, Sparkles } from "lucide-react";
+import Magnetic from "@/components/ui/Magnetic";
 
 const steps = [
   {
@@ -39,9 +40,20 @@ const steps = [
 
 const PhoneMockup = ({ image }: { image: string }) => {
   return (
-    <div className="relative w-full max-w-[90%] md:max-w-[340px] lg:max-w-[380px] aspect-[9/19.5] mx-auto group perspective-1000">
+    <div className="relative w-full max-w-[90%] md:max-w-[340px] lg:max-w-[380px] aspect-[9/19.5] mx-auto group perspective-2000">
+      {/* Dynamic Aura Background */}
+      <motion.div
+        animate={{
+          scale: [1, 1.1, 1],
+          opacity: [0.3, 0.5, 0.3],
+          rotate: [0, 5, 0]
+        }}
+        transition={{ duration: 10, repeat: Infinity }}
+        className="absolute -inset-20 bg-primary/20 blur-[100px] rounded-full pointer-events-none"
+      />
+
       {/* Phone Case Shadow */}
-      <div className="absolute inset-0 bg-charcoal/20 blur-[60px] rounded-[3.5rem] scale-[0.85] translate-y-10 group-hover:blur-[80px] transition-all duration-700" />
+      <div className="absolute inset-0 bg-charcoal/20 blur-[60px] rounded-[3.5rem] scale-[0.85] translate-y-10" />
 
       {/* Phone Frame */}
       <motion.div
@@ -54,11 +66,11 @@ const PhoneMockup = ({ image }: { image: string }) => {
           repeat: Infinity,
           ease: "easeInOut"
         }}
-        className="absolute inset-0 border-[14px] border-charcoal/95 rounded-[3.5rem] bg-card shadow-2xl overflow-hidden z-10 transition-transform duration-700 group-hover:scale-[1.02] border-t-[12px] border-b-[12px]"
+        className="absolute inset-0 border-[12px] md:border-[14px] border-charcoal/95 rounded-[3.2rem] md:rounded-[3.5rem] bg-card shadow-2xl overflow-hidden z-10 border-t-[10px] md:border-t-[12px] border-b-[10px] md:border-b-[12px]"
       >
         {/* Notch Area */}
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-7 bg-charcoal rounded-b-[1.75rem] z-40 flex items-center justify-center">
-          <div className="w-10 h-1 bg-white/10 rounded-full" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-28 md:w-32 h-6 md:h-7 bg-charcoal rounded-b-[1.75rem] z-40 flex items-center justify-center">
+          <div className="w-8 h-1 bg-white/10 rounded-full" />
         </div>
 
         {/* Actual Image Content */}
@@ -67,7 +79,7 @@ const PhoneMockup = ({ image }: { image: string }) => {
             key={image}
             initial={{ opacity: 0, scale: 1.1, filter: "blur(10px)" }}
             animate={{ opacity: 1, scale: 1, filter: "blur(0px)" }}
-            exit={{ opacity: 0, scale: 0.9, filter: "blur(10px)" }}
+            exit={{ opacity: 0, scale: 1.05, filter: "blur(10px)" }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
             className="absolute inset-0 z-20"
           >
@@ -77,22 +89,21 @@ const PhoneMockup = ({ image }: { image: string }) => {
               className="w-full h-full object-cover"
             />
 
-            {/* Glossy Overlay */}
-            <div className="absolute inset-0 pointer-events-none bg-gradient-to-tr from-white/10 via-transparent to-transparent opacity-50 z-30" />
+            {/* Premium Overlay Filter */}
+            <div className="absolute inset-0 bg-gradient-to-tr from-black/20 via-transparent to-white/10 opacity-30 z-30 pointer-events-none" />
           </motion.div>
         </AnimatePresence>
 
-        {/* Dynamic Scan Line Effect */}
+        {/* Dynamic Light Sweep */}
         <motion.div
-          animate={{ top: ["-100%", "200%"] }}
-          transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
-          className="absolute left-0 right-0 h-[30%] bg-gradient-to-b from-transparent via-primary/5 to-transparent pointer-events-none z-35"
+          animate={{ left: ["-100%", "200%"] }}
+          transition={{ duration: 3, repeat: Infinity, ease: "linear", repeatDelay: 4 }}
+          className="absolute inset-y-0 w-20 bg-gradient-to-r from-transparent via-white/10 to-transparent skew-x-12 pointer-events-none z-[35]"
         />
       </motion.div>
 
       {/* Ambient Floating Accents */}
-      <div className="absolute -top-12 -right-12 w-32 h-32 bg-rose-400/10 blur-[50px] rounded-full animate-pulse-border" />
-      <div className="absolute -bottom-16 -left-16 w-48 h-48 bg-primary/10 blur-[70px] rounded-full animate-pulse-border" style={{ animationDelay: "2s" }} />
+      <div className="absolute -top-12 -right-12 w-32 h-32 bg-primary/10 blur-[50px] rounded-full animate-pulse-soft" />
     </div>
   );
 };
@@ -103,19 +114,14 @@ const GettingStarted = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveStep((prev) => (prev + 1) % steps.length);
-    }, 8000);
+    }, 6000);
     return () => clearInterval(interval);
   }, []);
 
   return (
-    <section className="py-24 md:py-40 relative overflow-hidden bg-background">
-      {/* Background Decorative Text */}
-      <div className="absolute top-[10%] left-[-5%] text-[15vw] font-bold text-charcoal/[0.02] select-none pointer-events-none uppercase">
-        Process
-      </div>
-      <div className="absolute bottom-[10%] right-[-5%] text-[15vw] font-bold text-charcoal/[0.02] select-none pointer-events-none uppercase">
-        Connect
-      </div>
+    <section id="how-it-works" className="py-24 md:py-48 relative overflow-hidden bg-background">
+      {/* Cinematic Background Elements */}
+      <div className="absolute top-0 left-0 w-full h-full bg-[radial-gradient(circle_at_20%_20%,rgba(245,53,170,0.03),transparent_40%)]" />
 
       <div className="container-tight relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 lg:gap-32 items-center">
@@ -124,23 +130,27 @@ const GettingStarted = () => {
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 1, ease: "easeOut" }}
+            transition={{ duration: 1, ease: [0.22, 1, 0.36, 1] }}
             className="order-2 lg:order-1 relative"
           >
             <PhoneMockup image={steps[activeStep].image} />
 
-            {/* Step Label Overlay */}
-            <motion.div
-              key={steps[activeStep].label}
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              className="absolute -bottom-10 left-1/2 -translate-x-1/2 bg-white/80 dark:bg-black/80 backdrop-blur-md px-6 py-2 rounded-full border border-primary/10 shadow-lg z-20 flex items-center gap-2"
-            >
-              <div className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-              <span className="text-[10px] font-bold tracking-[0.2em] text-charcoal uppercase">
-                {steps[activeStep].label}
-              </span>
-            </motion.div>
+            {/* Dynamic Step Label */}
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={steps[activeStep].label}
+                initial={{ opacity: 0, y: 15, scale: 0.9 }}
+                animate={{ opacity: 1, y: 0, scale: 1 }}
+                exit={{ opacity: 0, y: -15, scale: 0.9 }}
+                transition={{ duration: 0.5, ease: "backOut" }}
+                className="absolute -bottom-12 left-1/2 -translate-x-1/2 bg-white dark:bg-card px-8 py-3 rounded-full border border-primary/10 shadow-glow z-20 flex items-center gap-3"
+              >
+                <div className="w-2.5 h-2.5 rounded-full bg-primary animate-pulse" />
+                <span className="text-[11px] font-bold tracking-[0.3em] text-charcoal uppercase">
+                  {steps[activeStep].label}
+                </span>
+              </motion.div>
+            </AnimatePresence>
           </motion.div>
 
           {/* Right Column: Interaction & Text */}
@@ -149,83 +159,85 @@ const GettingStarted = () => {
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
-              className="mb-12"
+              className="mb-16"
             >
               <div className="inline-flex items-center gap-2 mb-6 px-4 py-1.5 rounded-full bg-accent/50 border border-primary/10">
                 <span className="w-1.5 h-1.5 rounded-full bg-primary" />
                 <span className="text-[11px] font-bold tracking-[0.3em] text-primary uppercase">
-                  HOW IT WORKS
+                  EXPERIENCE
                 </span>
               </div>
 
-              <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold text-charcoal mb-8 leading-[1.1]">
-                Five steps to a <br />
+              <h2 className="heading-section text-charcoal mb-8">
+                Building your <br />
                 <span className="font-serif-italic text-primary italic">private world</span>
               </h2>
 
-              <p className="text-secondary-foreground text-lg md:text-xl leading-relaxed max-w-xl">
-                We've engineered the connection process to be as effortless as it is secure.
-                Your digital sanctuary is only moments away.
+              <p className="text-secondary-foreground text-lg md:text-xl leading-relaxed max-w-xl opacity-80">
+                We've engineered a seamless transition into your digital sanctuary. Every step is encrypted, private, and designed for two.
               </p>
             </motion.div>
 
-            <div className="space-y-3">
+            <div className="space-y-4">
               {steps.map((step, index) => (
-                <button
-                  key={step.id}
-                  onClick={() => setActiveStep(index)}
-                  className={`relative w-full text-left p-6 rounded-[2.5rem] transition-all duration-500 overflow-hidden group ${activeStep === index
-                    ? "bg-white dark:bg-white/5 shadow-soft border border-primary/10"
-                    : "hover:bg-accent/30 border border-transparent"
-                    }`}
-                >
-                  {/* Subtle active progress bar */}
-                  {activeStep === index && (
-                    <motion.div
-                      layoutId="step-progress-active"
-                      className="absolute left-0 top-0 bottom-0 w-1.5 bg-primary"
-                    />
-                  )}
+                <Magnetic key={step.id} strength={0.15}>
+                  <button
+                    onClick={() => setActiveStep(index)}
+                    className={`relative w-full text-left p-6 md:p-8 rounded-[2.5rem] transition-all duration-700 overflow-hidden group ${activeStep === index
+                      ? "bg-white dark:bg-card shadow-soft border border-primary/10"
+                      : "hover:bg-accent/30 border border-transparent"
+                      }`}
+                  >
+                    {/* Active Indicator Line */}
+                    {activeStep === index && (
+                      <motion.div
+                        layoutId="active-step-line"
+                        className="absolute left-0 top-0 bottom-0 w-1.5 bg-primary rounded-full"
+                      />
+                    )}
 
-                  <div className="flex gap-6 items-start">
-                    <div className={`w-12 h-12 rounded-2xl flex items-center justify-center transition-all duration-500 ${activeStep === index ? "bg-primary text-white scale-110 shadow-glow" : "bg-card text-secondary-foreground group-hover:bg-white"
-                      }`}>
-                      {index + 1}
-                    </div>
-
-                    <div className="flex-1">
-                      <div className="flex items-center justify-between mb-1">
-                        <h3 className={`text-xl font-bold transition-colors duration-500 ${activeStep === index ? "text-charcoal" : "text-gray-400"
-                          }`}>
-                          {step.title}
-                        </h3>
-                        {activeStep === index && (
-                          <motion.div
-                            initial={{ opacity: 0, scale: 0 }}
-                            animate={{ opacity: 1, scale: 1 }}
-                            className="text-primary"
-                          >
-                            {step.icon}
-                          </motion.div>
-                        )}
+                    <div className="flex gap-8 items-center">
+                      <div className={`w-14 h-14 rounded-2xl flex items-center justify-center transition-all duration-700 ${activeStep === index
+                        ? "bg-primary text-white scale-110 shadow-glow"
+                        : "bg-accent/50 text-primary group-hover:bg-white"
+                        }`}>
+                        <span className="font-serif text-xl font-bold">{index + 1}</span>
                       </div>
 
-                      <AnimatePresence mode="wait">
-                        {activeStep === index && (
-                          <motion.p
-                            initial={{ height: 0, opacity: 0, y: -10 }}
-                            animate={{ height: "auto", opacity: 1, y: 0 }}
-                            exit={{ height: 0, opacity: 0, y: -10 }}
-                            transition={{ duration: 0.4, ease: "circOut" }}
-                            className="text-secondary-foreground text-sm md:text-base leading-relaxed overflow-hidden pr-8"
-                          >
-                            {step.description}
-                          </motion.p>
-                        )}
-                      </AnimatePresence>
+                      <div className="flex-1">
+                        <div className="flex items-center justify-between mb-1">
+                          <h3 className={`text-xl md:text-2xl font-serif font-bold transition-colors duration-700 ${activeStep === index ? "text-charcoal" : "text-gray-400"
+                            }`}>
+                            {step.title}
+                          </h3>
+                          {activeStep === index && (
+                            <motion.div
+                              initial={{ opacity: 0, scale: 0 }}
+                              animate={{ opacity: 1, scale: 1 }}
+                              className="text-primary"
+                            >
+                              <Heart className="w-5 h-5 fill-current" />
+                            </motion.div>
+                          )}
+                        </div>
+
+                        <AnimatePresence mode="wait">
+                          {activeStep === index && (
+                            <motion.p
+                              initial={{ height: 0, opacity: 0 }}
+                              animate={{ height: "auto", opacity: 0.7 }}
+                              exit={{ height: 0, opacity: 0 }}
+                              transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                              className="text-secondary-foreground text-base leading-relaxed overflow-hidden"
+                            >
+                              {step.description}
+                            </motion.p>
+                          )}
+                        </AnimatePresence>
+                      </div>
                     </div>
-                  </div>
-                </button>
+                  </button>
+                </Magnetic>
               ))}
             </div>
           </div>

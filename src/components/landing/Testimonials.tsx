@@ -2,11 +2,10 @@ import { ChevronLeft, ChevronRight, Quote } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { testimonials } from "@/lib/mockData";
+import Magnetic from "@/components/ui/Magnetic";
 
 const Testimonials = () => {
   const [activeIndex, setActiveIndex] = useState(0);
-
-  // Data moved to @/lib/mockData
 
   const nextSlide = () => {
     setActiveIndex((prev) => (prev + 1) % testimonials.length);
@@ -17,114 +16,123 @@ const Testimonials = () => {
   };
 
   return (
-    <section className="py-16 md:py-32 bg-background/30">
-      <div className="container-tight max-w-5xl">
+    <section id="testimonials" className="py-24 md:py-48 bg-background relative overflow-hidden">
+      {/* Decorative Background */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/5 blur-[150px] rounded-full pointer-events-none" />
 
+      <div className="container-tight relative z-10">
         {/* Header */}
-        <div className="text-center mb-10 md:mb-16">
-          <motion.h2
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
+        <div className="text-center mb-20 md:mb-32">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="font-serif text-3xl md:text-5xl text-charcoal mb-4"
+            className="inline-flex items-center gap-2 mb-8 px-4 py-1.5 rounded-full bg-accent/50 border border-primary/10"
           >
-            What Our Users Say
-          </motion.h2>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-secondary-foreground text-base md:text-lg font-sans px-4"
-          >
-            Stories from couples who found their quiet space
-          </motion.p>
+            <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+            <span className="text-[11px] font-bold tracking-[0.3em] text-primary uppercase">TESTIMONIALS</span>
+          </motion.div>
+          <h2 className="heading-section text-charcoal">
+            Stories of <span className="font-serif-italic text-primary italic lowercase">connection</span>
+          </h2>
         </div>
 
-        {/* Carousel Container */}
-        <div className="flex items-center justify-center gap-4 md:gap-12 text-charcoal">
+        {/* Carousel Layout */}
+        <div className="relative max-w-5xl mx-auto">
+          <div className="flex items-center gap-8 md:gap-16">
+            {/* Prev Button - Desktop */}
+            <div className="hidden lg:block">
+              <Magnetic strength={0.4}>
+                <button
+                  onClick={prevSlide}
+                  className="w-16 h-16 rounded-full bg-white dark:bg-card border border-primary/5 flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-500 shadow-soft group"
+                  aria-label="Previous testimonial"
+                >
+                  <ChevronLeft className="w-6 h-6 group-hover:-translate-x-1 transition-transform" />
+                </button>
+              </Magnetic>
+            </div>
 
-          {/* Prev Button */}
-          <button
-            onClick={prevSlide}
-            className="hidden md:flex flex-none w-12 h-12 rounded-full bg-card border border-border items-center justify-center hover:bg-background hover:border-primary/30 transition-all shadow-sm z-20"
-            aria-label="Previous testimonial"
-          >
-            <ChevronLeft className="w-5 h-5 opacity-60" />
-          </button>
-
-          {/* Card */}
-          <div className="flex-1 relative min-h-[320px]">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeIndex}
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                exit={{ opacity: 0, x: -20 }}
-                transition={{ duration: 0.4 }}
-                className="glass-card rounded-[2rem] p-8 md:p-12 flex flex-col justify-center h-full"
-              >
-
-                {/* Pink Quote Icon */}
-                <div className="mb-6 text-primary/40">
-                  <Quote className="w-10 h-10 fill-current ml-1" />
-                </div>
-
-                {/* Quote */}
-                <p className="font-serif text-xl md:text-2xl text-charcoal leading-relaxed mb-6 font-medium">
-                  "{testimonials[activeIndex].quote}"
-                </p>
-
-                {/* Subtext */}
-                <p className="text-secondary-foreground text-sm md:text-base mb-8 font-light">
-                  {testimonials[activeIndex].subtext}
-                </p>
-
-                {/* Author */}
-                <div className="flex items-center gap-4">
-                  <div className="w-12 h-12 rounded-full bg-rose-soft text-primary flex items-center justify-center font-bold text-sm tracking-widest">
-                    {testimonials[activeIndex].initials}
+            {/* Main Content Area */}
+            <div className="flex-1 relative min-h-[450px] md:min-h-[400px]">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeIndex}
+                  initial={{ opacity: 0, scale: 0.95, y: 20 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 1.05, y: -20 }}
+                  transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+                  className="glass-card rounded-[3.5rem] md:rounded-[5rem] p-10 md:p-20 flex flex-col justify-center h-full relative overflow-hidden"
+                >
+                  <div className="absolute top-0 right-0 p-12 opacity-5 pointer-events-none">
+                    <Quote className="w-40 h-40" />
                   </div>
-                  <div>
-                    <div className="font-bold text-charcoal">{testimonials[activeIndex].author}</div>
-                    <div className="text-sm text-secondary-foreground">{testimonials[activeIndex].role}</div>
+
+                  {/* Quote UI */}
+                  <div className="mb-10 text-primary">
+                    <Quote className="w-12 h-12 fill-current" />
                   </div>
-                </div>
-              </motion.div>
-            </AnimatePresence>
+
+                  <p className="font-serif text-2xl md:text-3xl lg:text-4xl text-charcoal leading-tight mb-10 font-bold opacity-90">
+                    "{testimonials[activeIndex].quote}"
+                  </p>
+
+                  <p className="text-secondary-foreground text-lg md:text-xl mb-12 opacity-70 leading-relaxed max-w-2xl italic font-serif-italic">
+                    {testimonials[activeIndex].subtext}
+                  </p>
+
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-6">
+                    <div className="w-16 h-16 rounded-2xl bg-accent text-primary flex items-center justify-center font-bold text-xl tracking-widest shadow-glow">
+                      {testimonials[activeIndex].initials}
+                    </div>
+                    <div>
+                      <div className="font-bold text-xl text-charcoal">{testimonials[activeIndex].author}</div>
+                      <div className="text-primary font-bold text-xs uppercase tracking-widest mt-1 opacity-60">Connected since {testimonials[activeIndex].role}</div>
+                    </div>
+                  </div>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            {/* Next Button - Desktop */}
+            <div className="hidden lg:block">
+              <Magnetic strength={0.4}>
+                <button
+                  onClick={nextSlide}
+                  className="w-16 h-16 rounded-full bg-white dark:bg-card border border-primary/5 flex items-center justify-center hover:bg-primary hover:text-white transition-all duration-500 shadow-soft group"
+                  aria-label="Next testimonial"
+                >
+                  <ChevronRight className="w-6 h-6 group-hover:translate-x-1 transition-transform" />
+                </button>
+              </Magnetic>
+            </div>
           </div>
 
-          {/* Next Button */}
-          <button
-            onClick={nextSlide}
-            className="hidden md:flex flex-none w-12 h-12 rounded-full bg-card border border-border items-center justify-center hover:bg-background hover:border-primary/30 transition-all shadow-sm z-20"
-            aria-label="Next testimonial"
-          >
-            <ChevronRight className="w-5 h-5 opacity-60" />
-          </button>
-        </div>
+          {/* Dots Pagination & Mobile Controls */}
+          <div className="flex flex-col items-center gap-10 mt-16 md:mt-20">
+            <div className="flex justify-center items-center gap-4">
+              {testimonials.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setActiveIndex(idx)}
+                  className={`transition-all duration-700 rounded-full ${idx === activeIndex
+                    ? "w-12 h-2 bg-primary shadow-glow"
+                    : "w-2 h-2 bg-primary/10 hover:bg-primary/30"
+                    }`}
+                />
+              ))}
+            </div>
 
-        {/* Dots Pagination */}
-        <div className="flex justify-center items-center gap-3 mt-10">
-          {testimonials.map((_, idx) => (
-            <button
-              key={idx}
-              onClick={() => setActiveIndex(idx)}
-              aria-label={`Go to testimonial ${idx + 1}`}
-              className={`transition-all duration-300 rounded-full ${idx === activeIndex
-                ? "w-8 h-1.5 bg-primary"
-                : "w-1.5 h-1.5 bg-border hover:bg-muted-foreground/30"
-                }`}
-            />
-          ))}
+            <div className="flex lg:hidden justify-center gap-8">
+              <Magnetic strength={0.3}>
+                <button onClick={prevSlide} className="w-14 h-14 bg-white rounded-full shadow-soft flex items-center justify-center text-primary border border-primary/5"><ChevronLeft /></button>
+              </Magnetic>
+              <Magnetic strength={0.3}>
+                <button onClick={nextSlide} className="w-14 h-14 bg-white rounded-full shadow-soft flex items-center justify-center text-primary border border-primary/5"><ChevronRight /></button>
+              </Magnetic>
+            </div>
+          </div>
         </div>
-
-        <div className="flex md:hidden justify-center gap-6 mt-6">
-          <button onClick={prevSlide} className="p-3 bg-card rounded-full shadow-sm text-primary"><ChevronLeft /></button>
-          <button onClick={nextSlide} className="p-3 bg-card rounded-full shadow-sm text-primary"><ChevronRight /></button>
-        </div>
-
       </div>
     </section>
   );

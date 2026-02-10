@@ -5,7 +5,8 @@ const ThreeCanvas = () => {
     const mountRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        if (!mountRef.current) return;
+        const currentRef = mountRef.current;
+        if (!currentRef) return;
 
         let scene: THREE.Scene, camera: THREE.PerspectiveCamera, renderer: THREE.WebGLRenderer, particles: THREE.Points;
         let mouseX = 0, mouseY = 0;
@@ -14,7 +15,7 @@ const ThreeCanvas = () => {
         let animationFrameId: number;
 
         const init = () => {
-            const container = mountRef.current;
+            const container = currentRef;
             if (!container) return;
 
             scene = new THREE.Scene();
@@ -56,6 +57,7 @@ const ThreeCanvas = () => {
             window.addEventListener('resize', onWindowResize, false);
 
             // Store observer for cleanup
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             (init as any).observer = observer;
         };
 
@@ -200,7 +202,9 @@ const ThreeCanvas = () => {
             document.removeEventListener('mousemove', onMouseMove);
             window.removeEventListener('resize', onWindowResize);
 
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
             if ((init as any).observer) {
+                // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 (init as any).observer.disconnect();
             }
 
@@ -209,16 +213,18 @@ const ThreeCanvas = () => {
                 if (particles.geometry) particles.geometry.dispose();
                 if (particles.material) {
                     if (Array.isArray(particles.material)) {
-                        particles.material.forEach(m => m.dispose());
+                        particles.material.forEach((m: THREE.Material) => m.dispose());
                     } else {
-                        particles.material.dispose();
+                        (particles.material as THREE.Material).dispose();
                     }
                 }
                 scene.remove(particles);
             }
 
-            if (mountRef.current && renderer && renderer.domElement) {
-                mountRef.current.removeChild(renderer.domElement);
+            if (currentRef && renderer && renderer.domElement) {
+                if (currentRef.contains(renderer.domElement)) {
+                    currentRef.removeChild(renderer.domElement);
+                }
             }
             if (renderer) {
                 renderer.dispose();

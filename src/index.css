@@ -21,8 +21,8 @@
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 20%;
 
-    /* Neon Pink Primary Theme (#F535AA) */
-    --primary: 324 91% 58%;
+    /* Brand Primary Color (#F22666) - HSL: 341 88% 55% */
+    --primary: 341 88% 55%;
     --primary-foreground: 0 0% 100%;
 
     /* Soft Warm Beige/Grey */
@@ -32,23 +32,23 @@
     --muted: 30 10% 97%;
     --muted-foreground: 0 0% 45%;
 
-    --accent: 324 91% 97%;
-    --accent-foreground: 324 91% 45%;
+    --accent: 341 88% 97%;
+    --accent-foreground: 341 88% 45%;
 
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
 
     --border: 30 10% 92%;
     --input: 30 10% 92%;
-    --ring: 324 91% 58%;
+    --ring: 341 88% 55%;
 
     --radius: 2rem;
 
-    /* Custom Tokens for Romantic Aesthetic (Neon Pink base) */
-    --rose-soft: 324 91% 94%;
-    --rose-light: 324 91% 85%;
-    --rose-dark: 324 91% 35%;
-    --rose-glow: 324 91% 58% / 0.15;
+    /* Custom Tokens for Romantic Aesthetic (#F22666 base) */
+    --rose-soft: 341 88% 94%;
+    --rose-light: 341 88% 85%;
+    --rose-dark: 341 88% 35%;
+    --rose-glow: 341 88% 55% / 0.15;
 
     --blue-mist: 210 20% 96%;
     --blue-light: 210 20% 90%;
@@ -75,24 +75,24 @@
     --muted: 240 5% 10%;
     --muted-foreground: 240 5% 60%;
 
-    --accent: 324 91% 15%;
-    --accent-foreground: 324 91% 70%;
+    --accent: 341 88% 15%;
+    --accent-foreground: 341 88% 70%;
 
     --border: 240 5% 15%;
     --input: 240 5% 15%;
 
-    --rose-soft: 324 91% 10%;
-    --rose-light: 324 91% 20%;
-    --rose-dark: 324 91% 85%;
-    --rose-glow: 324 91% 58% / 0.25;
+    --rose-soft: 341 88% 10%;
+    --rose-light: 341 88% 20%;
+    --rose-dark: 341 88% 85%;
+    --rose-glow: 341 88% 55% / 0.25;
 
     --charcoal: 0 0% 98%;
     --noise-opacity: 0.12;
 
     /* Advanced Neon Glow Tokens */
-    --neon-glow: 324 91% 58% / 0.4;
-    --card-glow: 324 91% 58% / 0.08;
-    --text-glow: 324 91% 70% / 0.3;
+    --neon-glow: 341 88% 55% / 0.4;
+    --card-glow: 341 88% 55% / 0.08;
+    --text-glow: 341 88% 70% / 0.3;
   }
 }
 
@@ -105,6 +105,11 @@
   body {
     @apply bg-background text-foreground antialiased font-sans overflow-x-hidden w-full;
     font-family: 'Nunito', sans-serif;
+  }
+
+  /* Ensure scroll container has proper positioning for Framer Motion */
+  html {
+    position: relative;
   }
 
   /* Hide scrollbar for Chrome, Safari and Opera */
@@ -210,15 +215,15 @@
 
   /* Red Buttons */
   .btn-primary {
-    @apply bg-primary text-primary-foreground px-8 py-3.5 rounded-full font-bold text-base hover:opacity-90 hover:shadow-glow transition-all duration-300 shadow-lg shadow-primary/30 flex items-center justify-center gap-2;
+    @apply bg-primary text-primary-foreground px-8 py-3.5 rounded-full font-bold text-base hover:opacity-90 hover:shadow-glow transition-all duration-300 shadow-lg shadow-primary/30 flex items-center justify-center gap-2 whitespace-nowrap;
   }
 
   .btn-secondary {
-    @apply bg-secondary text-secondary-foreground px-8 py-3.5 rounded-full font-semibold text-base hover:bg-secondary/80 transition-all duration-300 flex items-center justify-center gap-2;
+    @apply bg-secondary text-secondary-foreground px-8 py-3.5 rounded-full font-semibold text-base hover:bg-secondary/80 transition-all duration-300 flex items-center justify-center gap-2 whitespace-nowrap;
   }
 
   .container-tight {
-    @apply max-w-6xl mx-auto px-4 md:px-12 lg:px-16;
+    @apply max-w-6xl mx-auto px-5 md:px-12 lg:px-16;
   }
 
   /* Glassmorphism */
@@ -252,11 +257,13 @@
 
   /* Refined Typography */
   .heading-hero {
-    @apply font-serif text-5xl md:text-7xl lg:text-8xl leading-[1.1] tracking-tight text-charcoal;
+    @apply font-serif leading-[1.05] tracking-tight text-charcoal;
+    font-size: clamp(2.5rem, 8vw + 0.5rem, 7rem);
   }
 
   .heading-section {
-    @apply font-serif text-4xl md:text-5xl lg:text-6xl leading-tight tracking-tight text-charcoal;
+    @apply font-serif leading-[1.15] tracking-tight text-charcoal;
+    font-size: clamp(2rem, 5vw + 0.5rem, 4.5rem);
   }
 
   .text-rose-dark {

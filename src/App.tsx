@@ -7,10 +7,10 @@ import ScrollToTop from "./components/layout/ScrollToTop";
 import Index from "./pages/Index";
 import Features from "./pages/Features";
 import Docs from "./pages/Docs";
-import Signup from "./pages/Signup";
 import HowItWorks from "./pages/HowItWorks";
 import Privacy from "./pages/Privacy";
 import About from "./pages/About";
+import Download from "./pages/Download";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -21,7 +21,12 @@ const App = () => (
       <div className="noise-overlay" />
       <Toaster />
       <Sonner />
-      <BrowserRouter>
+      <BrowserRouter
+        future={{
+          v7_startTransition: true,
+          v7_relativeSplatPath: true,
+        }}
+      >
         <ScrollToTop />
         <Routes>
           <Route path="/" element={<Index />} />
@@ -30,7 +35,7 @@ const App = () => (
           <Route path="/how-it-works" element={<HowItWorks />} />
           <Route path="/privacy" element={<Privacy />} />
           <Route path="/about" element={<About />} />
-          <Route path="/signup" element={<Signup />} />
+          <Route path="/download" element={<Download />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

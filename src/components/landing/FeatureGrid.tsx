@@ -49,20 +49,45 @@ const NumberCounter = ({ value, suffix = "" }: { value: number; suffix?: string 
 
 const FeatureCard = memo(({ icon, title, description, stat, statSuffix, statLabel, index }: FeatureCardProps) => {
   const isStaggered = index % 2 !== 0;
+  const x = useSpring(0, { stiffness: 300, damping: 30 });
+  const y = useSpring(0, { stiffness: 300, damping: 30 });
+
+  const rotateX = useTransform(y, [-100, 100], [10, -10]);
+  const rotateY = useTransform(x, [-100, 100], [-10, 10]);
+
+  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
+    const rect = e.currentTarget.getBoundingClientRect();
+    const centerX = rect.left + rect.width / 2;
+    const centerY = rect.top + rect.height / 2;
+    x.set(e.clientX - centerX);
+    y.set(e.clientY - centerY);
+  };
+
+  const handleMouseLeave = () => {
+    x.set(0);
+    y.set(0);
+  };
 
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      style={{
+        rotateX,
+        rotateY,
+        transformStyle: "preserve-3d",
+      }}
       transition={{ duration: 0.6, delay: index * 0.1 }}
-      className={`glass-card p-8 md:p-10 rounded-[2.5rem] flex flex-col h-full group hover:shadow-2xl transition-all duration-500 relative overflow-hidden ${isStaggered ? "md:translate-y-12" : ""
+      className={`glass-card p-8 md:p-10 rounded-[2.5rem] flex flex-col h-full group hover:shadow-[0_40px_80px_-20px_rgba(0,0,0,0.15)] transition-shadow duration-500 relative overflow-hidden ${isStaggered ? "md:translate-y-12" : ""
         }`}
     >
       {/* Subtle Aura Hover Effect */}
       <div className="absolute inset-0 bg-primary/5 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
-      <div className="relative z-10">
+      <div className="relative z-10" style={{ transform: "translateZ(50px)" }}>
         <div className="mb-8 inline-flex items-center justify-center w-14 h-14 rounded-2xl bg-accent text-primary group-hover:scale-110 group-hover:rotate-3 transition-transform duration-500 relative">
           <div className="absolute inset-0 bg-primary/20 blur-xl rounded-full opacity-0 group-hover:opacity-100 transition-opacity" />
           <div className="relative z-10">{icon}</div>
@@ -92,21 +117,22 @@ const FeatureCard = memo(({ icon, title, description, stat, statSuffix, statLabe
 FeatureCard.displayName = "FeatureCard";
 
 const FeatureGrid = () => {
-  // Data moved to @/lib/mockData
-
-
   return (
-    <section className="py-16 md:py-32 bg-background/30">
-      <div className="container-tight">
-        <div className="text-center mb-12 md:mb-24">
+    <section id="features-grid" className="py-24 md:py-48 bg-background relative overflow-hidden">
+      {/* Background Orbs */}
+      <div className="absolute top-1/2 left-0 w-[500px] h-[500px] bg-primary/5 blur-[120px] rounded-full -translate-x-1/2 -translate-y-1/2 pointer-events-none" />
+      <div className="absolute bottom-0 right-0 w-[500px] h-[500px] bg-primary/5 blur-[120px] rounded-full translate-x-1/2 translate-y-1/2 pointer-events-none" />
+
+      <div className="container-tight relative z-10">
+        <div className="text-center mb-20 md:mb-32">
           <motion.div
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
-            className="flex justify-center items-center gap-2 mb-4"
+            className="flex justify-center items-center gap-2 mb-8"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-            <span className="text-primary font-bold tracking-[0.3em] uppercase text-xs">
+            <span className="text-[11px] font-bold tracking-[0.3em] text-primary uppercase">
               DESIGNED FOR TWO
             </span>
           </motion.div>
@@ -115,23 +141,23 @@ const FeatureGrid = () => {
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.1 }}
-            className="heading-section text-charcoal mb-4 md:mb-6"
+            className="heading-section text-charcoal mb-8"
           >
             Beautifully simple <br />
-            <span className="font-serif-italic text-secondary-foreground italic text-[0.9em]">for your intentional bond</span>
+            <span className="font-serif-italic text-primary italic lowercase">for your intentional bond</span>
           </motion.h2>
 
           <motion.p
             initial={{ opacity: 0, y: 10 }}
             whileInView={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-secondary-foreground text-lg max-w-2xl mx-auto leading-relaxed"
+            className="text-lg md:text-2xl text-secondary-foreground max-w-3xl mx-auto leading-relaxed px-6 opacity-75"
           >
             Love Temple brings you closer with features that matter, and leaves out everything that doesn't.
           </motion.p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-10 pb-12">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 md:gap-12 lg:gap-16 pb-12">
           {features.map((feature, index) => (
             <FeatureCard
               key={feature.title}

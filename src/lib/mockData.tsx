@@ -137,36 +137,92 @@ export const docsSteps = [
         title: "Getting Started",
         description: "Begin your journey with Love Temple. Our intuitive onboarding process makes it easy to create your private sanctuary in minutes.",
         image: "/Invite/1.jpg",
+        images: [
+            "/Invite/1.jpg",
+            "/Invite/2.jpg",
+            "/Invite/3.jpg",
+            "/Invite/4.jpg"
+        ],
         iconName: "Rocket",
         steps: [
-            "Download the Love Temple app",
-            "Create your account securely",
-            "Invite your special person",
-            "Start building memories together"
+            "Download the Love Temple app from the store",
+            "Open the app and tap 'Begin' to start",
+            "Review our privacy promise and security info",
+            "Prepare to invite your partner to the space"
         ]
     },
     {
         title: "Privacy First",
         description: "Your conversations are end-to-end encrypted. We've built Love Temple with privacy as the foundation, ensuring your intimate moments remain truly private.",
         image: "/Invite/2.jpg",
+        images: [
+            "/Invite/2.jpg",
+            "/Invite/3.jpg",
+            "/Invite/4.jpg",
+            "/Invite/1.jpg"
+        ],
         iconName: "Shield",
         steps: [
-            "Enable E2E encryption",
-            "Set up a privacy passcode",
-            "Manage shared data access",
-            "Review security audits"
+            "Enable zero-knowledge encryption on your device",
+            "Set a 4-digit privacy passcode for app access",
+            "Manage shared data and gallery permissions",
+            "Rest easy knowing your sanctuary is secure"
         ]
     },
     {
         title: "Stay Connected",
         description: "Real-time messaging with your person. Whether you're together or apart, Love Temple keeps you connected in a distraction-free environment.",
         image: "/Invite/4.jpg",
+        images: [
+            "/Invite/4.jpg",
+            "/Invite/1.jpg",
+            "/Invite/2.jpg",
+            "/Invite/3.jpg"
+        ],
         iconName: "Zap",
         steps: [
-            "Enable push notifications",
-            "Use custom heart reactions",
-            "Share live location safely",
-            "Schedule 'Us-Time' alerts"
+            "Enable notifications to never miss a moment",
+            "Send a simple 'Heart' to show you're thinking of them",
+            "See when your partner is typing in real-time",
+            "Cherish the connection that only you two share"
+        ]
+    },
+    {
+        title: "Sign up/Creating a space",
+        description: "Follow these simple steps to set up your private space and start connecting with your partner.",
+        image: "/signup/step-1.png",
+        images: [
+            "/signup/step-1.png",
+            "/signup/step-2.png",
+            "/signup/step-3.png",
+            "/signup/step-4.png",
+            "/signup/step-5.png"
+        ],
+        iconName: "UserCheck",
+        steps: [
+            "Enter your email to receive a secure OTP",
+            "Verify your email with the 6-digit code",
+            "Set a 4-digit privacy code to keep your space safe",
+            "Choose a nickname for your partner to see",
+            "Confirm your passcode and enter your sanctuary"
+        ]
+    },
+    {
+        title: "Pairing/Invite your person",
+        description: "Connect your devices to create a unique bridge between you and your partner.",
+        image: "/pairing/step-1.png",
+        images: [
+            "/pairing/step-1.png",
+            "/pairing/step-2.png",
+            "/pairing/step-3.png",
+            "/pairing/step-4.png"
+        ],
+        iconName: "Users",
+        steps: [
+            "Start the connection process from your home screen",
+            "Generate a unique pairing code for your partner",
+            "Your partner enters the code on their device",
+            "Instantly bridge your two worlds together"
         ]
     }
 ];
@@ -175,8 +231,7 @@ export const footerNavigation = {
     product: [
         { name: "Features", href: "/features" },
         { name: "How It Works", href: "/how-it-works" },
-        { name: "Documentation", href: "/docs" },
-        { name: "Premium", href: "/signup" }
+        { name: "Documentation", href: "/docs" }
     ],
     company: [
         { name: "About Us", href: "/about" },
@@ -224,6 +279,30 @@ export const teamMembers = [
         name: "Sarah Jenkins",
         role: "Head of Community",
         bio: "Dedicated to fostering intentional connections globally."
+    }
+];
+
+export const momentsData = [
+    {
+        title: "Golden Hour Reflection",
+        date: "Feb 10, 2026",
+        description: "Capturing the warmth of a quiet afternoon. A moment preserved just for us.",
+        image: "/Invite/HeroImage.jpg",
+        category: "Moments"
+    },
+    {
+        title: "Our Weekly Ritual",
+        date: "Feb 08, 2026",
+        description: "Using the Daily Prompts to rediscover the small things that make us 'us'.",
+        image: "/Invite/4.jpg",
+        category: "Journal"
+    },
+    {
+        title: "Miles Apart, Heart to Heart",
+        date: "Feb 05, 2026",
+        description: "How Love Temple bridges the distance between London and New York.",
+        image: "/Invite/2.jpg",
+        category: "Story"
     }
 ];
 

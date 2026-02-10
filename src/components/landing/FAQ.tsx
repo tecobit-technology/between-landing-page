@@ -2,24 +2,32 @@ import { Plus, Minus } from "lucide-react";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { faqs } from "@/lib/mockData";
+import Magnetic from "@/components/ui/Magnetic";
 
-const FAQItem = ({ question, answer }: { question: string; answer: string }) => {
+const FAQItem = ({ question, answer, index }: { question: string; answer: string; index: number }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="border-b border-primary/10 last:border-0">
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      transition={{ duration: 0.8, delay: index * 0.1, ease: [0.22, 1, 0.36, 1] }}
+      className={`border-b border-primary/10 last:border-0 transition-colors duration-700 ${isOpen ? "bg-primary/[0.03]" : ""}`}
+    >
       <button
-        className="w-full py-8 flex items-center justify-between text-left focus:outline-none group"
+        className="w-full py-10 flex items-center justify-between text-left focus:outline-none group px-6 md:px-12"
         onClick={() => setIsOpen(!isOpen)}
         aria-expanded={isOpen}
-        aria-label={`${isOpen ? "Close" : "Open"} question: ${question}`}
       >
-        <span className={`font-serif text-xl md:text-2xl transition-colors duration-300 ${isOpen ? "text-primary" : "text-charcoal group-hover:text-primary"}`}>
+        <span className={`font-serif text-2xl md:text-3xl lg:text-4xl leading-tight transition-all duration-700 pr-8 ${isOpen ? "text-primary translate-x-4 italic" : "text-charcoal group-hover:text-primary group-hover:translate-x-2"}`}>
           {question}
         </span>
-        <span className={`flex-none w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 ${isOpen ? "bg-primary text-white rotate-0" : "bg-accent text-primary group-hover:bg-primary group-hover:text-white"}`}>
-          {isOpen ? <Minus className="w-5 h-5" /> : <Plus className="w-5 h-5" />}
-        </span>
+        <Magnetic strength={0.4}>
+          <span className={`flex-none w-12 h-12 md:w-16 md:h-16 rounded-full flex items-center justify-center transition-all duration-700 shadow-sm ${isOpen ? "bg-primary text-white rotate-180 shadow-glow" : "bg-accent text-primary group-hover:bg-primary group-hover:text-white"}`}>
+            {isOpen ? <Minus className="w-6 h-6 md:w-8 md:h-8" /> : <Plus className="w-6 h-6 md:w-8 md:h-8" />}
+          </span>
+        </Magnetic>
       </button>
 
       <AnimatePresence>
@@ -28,47 +36,54 @@ const FAQItem = ({ question, answer }: { question: string; answer: string }) => 
             initial={{ height: 0, opacity: 0 }}
             animate={{ height: "auto", opacity: 1 }}
             exit={{ height: 0, opacity: 0 }}
-            transition={{ duration: 0.4, ease: "easeInOut" }}
+            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
             className="overflow-hidden"
           >
-            <p className="text-secondary-foreground text-lg leading-relaxed pb-8 max-w-2xl px-1">
-              {answer}
-            </p>
+            <div className="pb-12 max-w-3xl px-6 md:px-12 md:ml-2">
+              <p className="text-secondary-foreground text-xl md:text-2xl leading-relaxed border-l-4 border-primary/30 pl-8 opacity-80">
+                {answer}
+              </p>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
-    </div>
+    </motion.div>
   );
 };
 
 const FAQ = () => {
-  // Data moved to @/lib/mockData
-
-
   return (
-    <section className="py-16 md:py-32 relative z-10 bg-background">
-      <div className="container-tight max-w-4xl">
-        <div className="text-center mb-12 md:mb-20">
+    <section id="faq" className="py-24 md:py-48 relative overflow-hidden bg-background">
+      {/* Cinematic Background Elements */}
+      <div className="absolute top-0 right-1/4 w-[600px] h-[600px] bg-primary/5 blur-[150px] rounded-full -z-10 animate-pulse-soft" />
+      <div className="absolute bottom-0 left-1/4 w-[500px] h-[500px] bg-primary/5 blur-[120px] rounded-full -z-10 animate-pulse-soft" style={{ animationDelay: '2s' }} />
+
+      <div className="container-tight relative z-10">
+        <div className="text-center mb-20 md:mb-32">
           <motion.div
-            initial={{ opacity: 0, y: 10 }}
-            whileInView={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, scale: 0.9 }}
+            whileInView={{ opacity: 1, scale: 1 }}
+            viewport={{ once: true }}
             transition={{ duration: 0.5 }}
-            className="flex justify-center items-center gap-2 mb-4"
+            className="inline-flex items-center gap-2 mb-8 px-4 py-1.5 rounded-full bg-accent/50 border border-primary/10"
           >
             <span className="w-1.5 h-1.5 rounded-full bg-primary" />
-            <span className="text-primary font-bold tracking-[0.3em] uppercase text-xs">
-              SUPPORT
+            <span className="text-[11px] font-bold tracking-[0.3em] text-primary uppercase">
+              SUPPORT & TRUST
             </span>
           </motion.div>
-          <h2 className="heading-section text-charcoal">
-            Common questions
+          <h2 className="heading-section text-charcoal pr-10">
+            Your questions, <br />
+            <span className="font-serif-italic text-primary italic lowercase">answered with care</span>
           </h2>
         </div>
 
-        <div className="flex flex-col bg-accent/30 rounded-[2.5rem] md:rounded-[3rem] p-6 md:p-12 border border-primary/10">
-          {faqs.map((faq, i) => (
-            <FAQItem key={i} question={faq.q} answer={faq.a} />
-          ))}
+        <div className="max-w-5xl mx-auto">
+          <div className="bg-card/40 backdrop-blur-xl rounded-[3.5rem] md:rounded-[5rem] border border-primary/5 shadow-soft overflow-hidden">
+            {faqs.map((faq, i) => (
+              <FAQItem key={i} index={i} question={faq.q} answer={faq.a} />
+            ))}
+          </div>
         </div>
       </div>
     </section>

@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { Link, useLocation } from "react-router-dom";
 import { siteConfig } from "@/lib/mockData";
 import ThemeToggle from "./ThemeToggle";
+import Magnetic from "@/components/ui/Magnetic";
+import TopBanner from "./TopBanner";
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -12,7 +14,7 @@ const Header = () => {
 
   useEffect(() => {
     const handleScroll = () => {
-      if (window.scrollY > 20) {
+      if (window.scrollY > 50) {
         if (!isScrolled) setIsScrolled(true);
       } else {
         if (isScrolled) setIsScrolled(false);
@@ -43,98 +45,147 @@ const Header = () => {
   }, []);
 
   return (
-    <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ease-in-out ${isScrolled
-        ? "py-4 bg-white/70 dark:bg-black/70 backdrop-blur-2xl border-b border-rose-100/30 dark:border-white/10 shadow-soft"
-        : "py-8 bg-transparent"
-        }`}
-    >
-      <div className="container-tight flex items-center justify-between">
-        {/* Logo */}
-        <Link to="/" className="flex items-center gap-3 group">
-          <div className="relative w-11 h-11 md:w-14 md:h-14 flex-shrink-0 rounded-xl overflow-hidden transition-all duration-500 group-hover:rotate-3 group-hover:scale-105 shadow-lg shadow-primary/20 bg-white">
-            <img
-              src="/logo.jpg"
-              alt={siteConfig.name}
-              width="56"
-              height="56"
-              className="w-full h-full object-cover"
-            />
-          </div>
-          <span className="font-sans text-2xl md:text-3xl text-charcoal font-bold tracking-tight">{siteConfig.name}</span>
-        </Link>
-
-        {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center gap-10">
-          {navLinks.map((link) => (
-            <Link
-              key={link.name}
-              to={link.href}
-              className={`text-sm font-semibold transition-colors relative group ${location.pathname === link.href ? "text-primary" : "text-secondary-foreground hover:text-primary"
-                }`}
-            >
-              {link.name}
-              <span className={`absolute -bottom-1 left-0 h-0.5 bg-primary transition-all duration-300 ${location.pathname === link.href ? "w-full" : "w-0 group-hover:w-full"
-                }`} />
-            </Link>
-          ))}
-        </nav>
-
-        <div className="hidden md:flex items-center gap-4">
-          <ThemeToggle />
-          <Link
-            to="/signup"
-            className="btn-primary py-2.5 px-6 text-sm"
-          >
-            Download Now
+    <div className="fixed top-0 left-0 right-0 z-50">
+      <TopBanner />
+      <header
+        className={`transition-all duration-700 ease-in-out ${isScrolled
+          ? "py-4 bg-white/70 dark:bg-black/70 backdrop-blur-2xl border-b border-rose-100/30 dark:border-white/10 shadow-soft"
+          : "py-8 bg-transparent"
+          }`}
+      >
+        <div className="container-tight flex items-center justify-between">
+          {/* Logo */}
+          <Link to="/" className="flex items-center gap-2 sm:gap-3 md:gap-4 group">
+            <div className="relative w-10 h-10 sm:w-12 sm:h-12 md:w-14 md:h-14 lg:w-16 lg:h-16 flex-shrink-0 rounded-xl md:rounded-2xl overflow-hidden transition-all duration-500 group-hover:scale-105 shadow-md md:shadow-lg shadow-primary/20 bg-white">
+              <img
+                src="/logo.jpg"
+                alt={siteConfig.name}
+                className="w-full h-full object-cover"
+              />
+            </div>
+            <span className="font-serif text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl text-charcoal font-bold tracking-tight leading-none">
+              {siteConfig.name}
+            </span>
           </Link>
-        </div>
 
-        <div className="flex md:hidden items-center gap-4">
-          <ThemeToggle />
-          {/* Mobile Menu Button */}
-          <button
-            className="p-2 text-charcoal"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-          >
-            {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
-          </button>
-        </div>
-      </div>
-
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {isMobileMenuOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            className="md:hidden absolute top-full left-0 right-0 bg-background border-b border-primary/10 overflow-hidden shadow-xl"
-          >
-            <nav className="flex flex-col p-6 gap-4">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.name}
-                  to={link.href}
-                  className={`py-3 text-lg font-medium border-b border-primary/5 transition-colors ${location.pathname === link.href ? "text-primary" : "text-charcoal"
-                    }`}
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  {link.name}
-                </Link>
-              ))}
+          {/* Desktop Navigation */}
+          <nav className="hidden md:flex items-center gap-10">
+            {navLinks.map((link) => (
               <Link
-                to="/signup"
-                className="btn-primary w-full mt-4 text-center"
-                onClick={() => setIsMobileMenuOpen(false)}
+                key={link.name}
+                to={link.href}
+                className={`text-sm font-semibold transition-colors relative group ${location.pathname === link.href ? "text-primary" : "text-secondary-foreground hover:text-primary"
+                  }`}
               >
-                Download Now
+                {link.name}
+                <span className={`absolute -bottom-1 left-0 h-0.5 bg-primary transition-all duration-300 ${location.pathname === link.href ? "w-full" : "w-0 group-hover:w-full"
+                  }`} />
               </Link>
-            </nav>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </header>
+            ))}
+          </nav>
+
+          <div className="hidden md:flex items-center gap-4">
+            <ThemeToggle />
+            <Magnetic strength={0.3}>
+              <Link
+                to="/download"
+                className="btn-primary py-2.5 px-6 text-sm"
+              >
+                Download Lov Temple
+              </Link>
+            </Magnetic>
+          </div>
+
+          <div className="flex md:hidden items-center gap-2 sm:gap-3">
+            <ThemeToggle />
+            {/* Mobile Menu Button */}
+            <button
+              className="p-2 text-charcoal hover:bg-accent/50 rounded-lg transition-colors"
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              aria-label="Toggle menu"
+            >
+              {isMobileMenuOpen ? <X className="w-5 h-5 sm:w-6 sm:h-6" /> : <Menu className="w-5 h-5 sm:w-6 sm:h-6" />}
+            </button>
+          </div>
+        </div>
+
+        {/* Premium Full-Screen Mobile Menu */}
+        <AnimatePresence>
+          {isMobileMenuOpen && (
+            <motion.div
+              initial={{ opacity: 0, clipPath: "circle(0% at 90% 10%)" }}
+              animate={{ opacity: 1, clipPath: "circle(150% at 90% 10%)" }}
+              exit={{ opacity: 0, clipPath: "circle(0% at 90% 10%)" }}
+              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+              className="md:hidden fixed inset-0 bg-background/95 backdrop-blur-2xl z-[60] flex flex-col pt-32 px-8 overflow-hidden"
+            >
+              {/* Ambient Background Glows */}
+              <div className="absolute top-1/4 -left-20 w-64 h-64 bg-primary/10 blur-[100px] rounded-full" />
+              <div className="absolute bottom-1/4 -right-20 w-64 h-64 bg-primary/10 blur-[100px] rounded-full" />
+
+              <nav className="flex flex-col gap-6 relative z-10">
+                {navLinks.map((link, idx) => (
+                  <motion.div
+                    key={link.name}
+                    initial={{ opacity: 0, x: -30 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.2 + idx * 0.1, duration: 0.6 }}
+                  >
+                    <Link
+                      to={link.href}
+                      className={`text-4xl font-serif font-bold transition-all ${location.pathname === link.href ? "text-primary italic" : "text-charcoal active:scale-95"
+                        }`}
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      {link.name}
+                    </Link>
+                  </motion.div>
+                ))}
+
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.9 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.6, duration: 0.6 }}
+                  className="mt-8"
+                >
+                  <Magnetic strength={0.2}>
+                    <Link
+                      to="/download"
+                      className="btn-primary w-full py-5 text-xl text-center block shadow-glow"
+                      onClick={() => setIsMobileMenuOpen(false)}
+                    >
+                      Download App
+                    </Link>
+                  </Magnetic>
+                </motion.div>
+              </nav>
+
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1 }}
+                className="mt-auto mb-16 text-center space-y-4"
+              >
+                <div className="flex justify-center items-center gap-3">
+                  <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                    <Heart size={20} fill="currentColor" />
+                  </div>
+                </div>
+                <p className="text-secondary-foreground text-sm font-bold tracking-[0.3em] uppercase">Lov Temple</p>
+              </motion.div>
+
+              {/* Close Button Inside Menu */}
+              <button
+                onClick={() => setIsMobileMenuOpen(false)}
+                className="absolute top-8 right-8 w-14 h-14 rounded-full bg-accent flex items-center justify-center text-primary active:scale-90 transition-transform"
+              >
+                <X className="w-8 h-8" />
+              </button>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </header>
+    </div>
   );
 };
 

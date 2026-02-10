@@ -4,6 +4,7 @@ import MainLayout from "@/components/layout/MainLayout";
 import { Sparkles, ShieldCheck, Heart } from "lucide-react";
 
 const FeatureGrid = lazy(() => import("@/components/landing/FeatureGrid"));
+const MomentsPreview = lazy(() => import("@/components/landing/MomentsPreview"));
 
 const FeaturesPage = () => {
     return (
@@ -51,6 +52,10 @@ const FeaturesPage = () => {
                 {/* Features Component */}
                 <Suspense fallback={<div className="h-[60vh] flex items-center justify-center"><div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary"></div></div>}>
                     <FeatureGrid />
+                </Suspense>
+
+                <Suspense fallback={<div className="h-40 flex items-center justify-center"><div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div></div>}>
+                    <MomentsPreview />
                 </Suspense>
 
                 {/* Trust Section */}

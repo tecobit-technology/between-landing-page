@@ -32,7 +32,25 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
                         <LandingSkeleton />
                     </motion.div>
                 ) : (
-                    <>
+                    <div key="page-container">
+                        {/* Premium Page Transition Wipe */}
+                        <motion.div
+                            initial={{ scaleY: 0 }}
+                            animate={{ scaleY: 0 }}
+                            exit={{ scaleY: 1 }}
+                            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+                            style={{ originY: 1 }}
+                            className="fixed inset-0 bg-primary z-[100] pointer-events-none"
+                        />
+                        <motion.div
+                            initial={{ scaleY: 1 }}
+                            animate={{ scaleY: 0 }}
+                            exit={{ scaleY: 0 }}
+                            transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1], delay: 0.1 }}
+                            style={{ originY: 0 }}
+                            className="fixed inset-0 bg-primary z-[100] pointer-events-none"
+                        />
+
                         <div className="fixed inset-0 pointer-events-none z-50">
                             <div className="pointer-events-auto">
                                 <Suspense fallback={null}>
@@ -50,10 +68,9 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
                         </div>
 
                         <motion.main
-                            key="content"
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            transition={{ duration: 0.8, ease: "easeOut" }}
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            transition={{ duration: 0.8, delay: 0.3, ease: [0.22, 1, 0.36, 1] }}
                             className="relative z-10 w-full overflow-x-hidden pt-20"
                         >
                             {children}
@@ -61,7 +78,7 @@ const MainLayout = ({ children }: { children: React.ReactNode }) => {
                                 <Footer />
                             </Suspense>
                         </motion.main>
-                    </>
+                    </div>
                 )}
             </AnimatePresence>
         </div>

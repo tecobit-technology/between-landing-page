@@ -1,31 +1,46 @@
-import { motion } from "framer-motion";
+import { useRef } from "react";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { Heart, MessageCircle, Sparkles, Shield, UserCheck } from "lucide-react";
 import { Link } from "react-router-dom";
+import Magnetic from "@/components/ui/Magnetic";
 import { siteConfig } from "@/lib/mockData";
 
 const Hero = () => {
+  const sectionRef = useRef(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start start", "end start"],
+    container: { current: typeof window !== 'undefined' ? document.documentElement : null }
+  });
+
+  const y1 = useTransform(scrollYProgress, [0, 1], [0, 200]);
+  const y2 = useTransform(scrollYProgress, [0, 1], [0, -150]);
+  const rotate1 = useTransform(scrollYProgress, [0, 1], [0, 15]);
+  const opacityHero = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
+  const scaleHero = useTransform(scrollYProgress, [0, 0.5], [1, 0.9]);
 
   return (
-    <section className="relative min-h-screen flex flex-col items-center justify-start pt-24 lg:pt-40 overflow-hidden">
-      {/* Decorative Floating Elements */}
+    <section ref={sectionRef} className="relative min-h-screen flex flex-col items-center justify-start pt-32 md:pt-40 lg:pt-52 overflow-hidden">
+      {/* Decorative Floating Elements with Parallax */}
       <div className="absolute inset-0 pointer-events-none overflow-hidden">
         <motion.div
-          animate={{ y: [0, -20, 0], opacity: [0.3, 0.6, 0.3] }}
+          style={{ y: y1 }}
+          animate={{ opacity: [0.3, 0.6, 0.3] }}
           transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
           className="absolute top-1/4 left-4 md:left-20 text-primary/20"
         >
           <Heart size={30} className="md:w-10 md:h-10" fill="currentColor" />
         </motion.div>
         <motion.div
-          animate={{ y: [0, 20, 0], opacity: [0.2, 0.5, 0.2] }}
+          style={{ y: y2 }}
+          animate={{ opacity: [0.2, 0.5, 0.2] }}
           transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
           className="absolute top-1/3 right-4 md:right-32 text-primary/20"
         >
           <Heart size={40} className="md:w-[60px] md:h-[60px]" fill="currentColor" />
         </motion.div>
         <motion.div
-          animate={{ scale: [1, 1.2, 1], rotate: [0, 10, 0] }}
-          transition={{ duration: 8, repeat: Infinity, ease: "easeInOut" }}
+          style={{ y: y1, rotate: rotate1 }}
           className="absolute bottom-1/4 left-1/4 text-primary/10"
         >
           <Sparkles size={20} className="md:w-[30px] md:h-[30px]" />
@@ -35,18 +50,19 @@ const Hero = () => {
       {/* Atmospheric Glows & Background Image */}
       <div className="absolute inset-0 z-0">
         <div className="absolute top-0 left-0 w-full h-full bg-gradient-to-b from-background via-background/95 to-background z-10" />
-        <img
+        <motion.img
+          style={{ y: y1, scale: 1.1 }}
           src="/Invite/HeroImage.jpg"
           alt=""
-          className="w-full h-full object-cover opacity-[0.03] scale-110 blur-sm"
+          className="w-full h-full object-cover opacity-[0.03] blur-sm"
         />
       </div>
 
       {/* Refined Mesh Gradients */}
-      <div className="glow-mesh w-[800px] h-[800px] -top-40 -left-60 opacity-[0.15] animate-pulse-soft" />
-      <div className="glow-mesh w-[900px] h-[900px] bottom-0 -right-60 opacity-[0.15] animate-pulse-soft" style={{ animationDelay: "1s" }} />
+      <motion.div style={{ y: y2 }} className="glow-mesh w-[800px] h-[800px] -top-40 -left-60 opacity-[0.15] animate-pulse-soft" />
+      <motion.div style={{ y: y1, animationDelay: "1s" }} className="glow-mesh w-[900px] h-[900px] bottom-0 -right-60 opacity-[0.15] animate-pulse-soft" />
 
-      <div className="container-tight relative z-10 text-center">
+      <motion.div style={{ opacity: opacityHero, scale: scaleHero }} className="container-tight relative z-10 text-center">
         {/* State-of-the-Art Label */}
         <motion.div
           initial={{ opacity: 0, y: 10 }}
@@ -68,7 +84,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.2 }}
-          className="heading-hero text-charcoal mb-4"
+          className="heading-hero text-charcoal mb-6 md:mb-8"
         >
           A sacred space <br />
           <span className="font-serif-italic text-primary italic lowercase">for just the two of you</span>
@@ -79,7 +95,7 @@ const Hero = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.4 }}
-          className="text-base md:text-xl text-secondary-foreground max-w-2xl mx-auto mb-12 md:mb-16 leading-relaxed font-medium opacity-80 px-2"
+          className="text-lg md:text-2xl text-secondary-foreground max-w-2xl mx-auto mb-14 md:mb-20 leading-relaxed font-medium opacity-80 px-6 sm:px-0"
         >
           {siteConfig.description}
         </motion.p>
@@ -90,27 +106,32 @@ const Hero = () => {
           transition={{ duration: 0.8, delay: 0.6 }}
           className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center mb-24 md:mb-32 w-full max-w-md mx-auto sm:max-w-none"
         >
-          <Link
-            to="/signup"
-            className="btn-primary w-full sm:w-auto sm:min-w-[220px] shadow-glow active:scale-[0.98] transition-all text-center"
-          >
-            Download Now
-          </Link>
-          <Link
-            to="/features"
-            className="btn-secondary w-full sm:w-auto sm:min-w-[200px] border-primary/5 active:scale-[0.98] transition-all text-center flex items-center justify-center"
-          >
-            Explore Features
-          </Link>
+          <Magnetic strength={0.4}>
+            <Link
+              to="/download"
+              className="btn-primary w-full sm:w-auto sm:min-w-[220px] shadow-glow active:scale-[0.98] transition-all text-center"
+            >
+              Download Love Temple
+            </Link>
+          </Magnetic>
+          <Magnetic strength={0.25}>
+            <Link
+              to="/features"
+              className="btn-secondary w-full sm:w-auto sm:min-w-[200px] border-primary/5 active:scale-[0.98] transition-all text-center flex items-center justify-center"
+            >
+              Explore Features
+            </Link>
+          </Magnetic>
         </motion.div>
 
-        {/* Phone Mockup Animation */}
+        {/* Phone Mockup Animation with Parallax */}
         <div className="relative w-full max-w-[90%] md:max-w-[420px] mx-auto perspective-1000">
 
           {/* Floating UI Step 1 (Begin) */}
           <motion.div
+            style={{ y: y1 }}
             initial={{ opacity: 0, x: -100, rotate: -15 }}
-            animate={{ opacity: 1, x: -180, y: 40, rotate: -10 }}
+            animate={{ opacity: 1, x: -180, rotate: -10 }}
             transition={{ duration: 1.2, delay: 1 }}
             className="absolute hidden xl:block z-0 w-48 aspect-[9/19.5] rounded-3xl overflow-hidden border-2 border-primary/10 shadow-2xl opacity-40 grayscale-[0.5]"
           >
@@ -120,8 +141,9 @@ const Hero = () => {
 
           {/* Floating UI Step 2 (Invite) */}
           <motion.div
+            style={{ y: y2 }}
             initial={{ opacity: 0, x: 100, rotate: 15 }}
-            animate={{ opacity: 1, x: 180, y: -40, rotate: 12 }}
+            animate={{ opacity: 1, x: 180, rotate: 12 }}
             transition={{ duration: 1.2, delay: 1.2 }}
             className="absolute hidden xl:block z-0 w-48 aspect-[9/19.5] rounded-3xl overflow-hidden border-2 border-primary/10 shadow-2xl opacity-40 grayscale-[0.5]"
           >
@@ -186,10 +208,9 @@ const Hero = () => {
             </motion.div>
           </motion.div>
 
-          {/* Floating High-End Stats/Badges */}
+          {/* Floating High-End Stats/Badges with Parallax */}
           <motion.div
-            animate={{ y: [0, -20, 0], x: [0, -10, 0] }}
-            transition={{ duration: 5, repeat: Infinity, ease: "easeInOut" }}
+            style={{ y: y1 }}
             className="absolute -left-24 top-1/4 z-30 glass-card p-5 rounded-3xl shadow-xl hidden lg:flex items-center gap-4 border-2 border-white/50"
           >
             <div className="w-10 h-10 rounded-2xl bg-primary flex items-center justify-center text-white shadow-glow">
@@ -202,8 +223,7 @@ const Hero = () => {
           </motion.div>
 
           <motion.div
-            animate={{ y: [0, 20, 0], x: [0, 15, 0] }}
-            transition={{ duration: 7, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+            style={{ y: y2 }}
             className="absolute -right-28 top-2/3 z-30 glass-card p-5 rounded-3xl shadow-xl hidden lg:flex items-center gap-4 border-2 border-white/50"
           >
             <div className="w-10 h-10 rounded-2xl bg-accent flex items-center justify-center text-primary">
@@ -218,7 +238,7 @@ const Hero = () => {
           {/* Strong Glowing Aura behind phone */}
           <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[160%] h-[160%] bg-primary/20 blur-[120px] rounded-full -z-10 animate-pulse-soft" />
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 };

@@ -18,6 +18,7 @@ const ValentineBanner = lazy(() => import("@/components/landing/ValentineBanner"
 const DownloadCTA = lazy(() => import("@/components/landing/DownloadCTA"));
 const Footer = lazy(() => import("@/components/landing/Footer"));
 const CustomCursor = lazy(() => import("@/components/landing/CustomCursor"));
+const MomentsPreview = lazy(() => import("@/components/landing/MomentsPreview"));
 const BackToTop = lazy(() => import("@/components/landing/BackToTop"));
 
 // Loading fallback component
@@ -94,6 +95,9 @@ const Index = () => {
               </Suspense>
 
               <div id="features">
+                <Suspense fallback={<ComponentLoader />}>
+                  <MomentsPreview />
+                </Suspense>
                 <Suspense fallback={<ComponentLoader />}>
                   <FeatureGrid />
                 </Suspense>
