@@ -45,10 +45,10 @@ const Header = () => {
   }, []);
 
   return (
-    <div className="fixed top-0 left-0 right-0 z-50">
+    <div className="fixed top-0 left-0 right-0 z-50 w-full">
       <TopBanner />
       <header
-        className={`transition-all duration-700 ease-in-out ${isScrolled
+        className={`transition-all duration-700 ease-in-out w-full ${isScrolled
           ? "py-4 bg-white/70 dark:bg-black/70 backdrop-blur-2xl border-b border-rose-100/30 dark:border-white/10 shadow-soft"
           : "py-8 bg-transparent"
           }`}
@@ -108,32 +108,34 @@ const Header = () => {
             </button>
           </div>
         </div>
+      </header>
 
-        {/* Premium Full-Screen Mobile Menu */}
-        <AnimatePresence>
-          {isMobileMenuOpen && (
-            <motion.div
-              initial={{ opacity: 0, clipPath: "circle(0% at 90% 10%)" }}
-              animate={{ opacity: 1, clipPath: "circle(150% at 90% 10%)" }}
-              exit={{ opacity: 0, clipPath: "circle(0% at 90% 10%)" }}
-              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-              className="md:hidden fixed inset-0 bg-background/95 backdrop-blur-2xl z-[60] flex flex-col pt-32 px-8 overflow-hidden"
-            >
+      {/* Premium Full-Screen Mobile Menu */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <motion.div
+            initial={{ opacity: 0, y: -20 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -20 }}
+            transition={{ duration: 0.3 }}
+            className="md:hidden w-full bg-background/95 backdrop-blur-2xl border-b border-rose-100/30 dark:border-white/10 shadow-lg"
+          >
+            <div className="relative px-4 sm:px-6 py-6 sm:py-8 max-h-[calc(100vh-120px)] overflow-y-auto">
               {/* Ambient Background Glows */}
-              <div className="absolute top-1/4 -left-20 w-64 h-64 bg-primary/10 blur-[100px] rounded-full" />
-              <div className="absolute bottom-1/4 -right-20 w-64 h-64 bg-primary/10 blur-[100px] rounded-full" />
+              <div className="absolute top-1/4 -left-20 w-48 sm:w-64 h-48 sm:h-64 bg-primary/10 blur-[100px] rounded-full pointer-events-none" />
+              <div className="absolute bottom-1/4 -right-20 w-48 sm:w-64 h-48 sm:h-64 bg-primary/10 blur-[100px] rounded-full pointer-events-none" />
 
-              <nav className="flex flex-col gap-6 relative z-10">
+              <nav className="flex flex-col gap-4 sm:gap-6 relative z-10">
                 {navLinks.map((link, idx) => (
                   <motion.div
                     key={link.name}
                     initial={{ opacity: 0, x: -30 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: 0.2 + idx * 0.1, duration: 0.6 }}
+                    transition={{ delay: 0.1 + idx * 0.08, duration: 0.4 }}
                   >
                     <Link
                       to={link.href}
-                      className={`text-4xl font-serif font-bold transition-all ${location.pathname === link.href ? "text-primary italic" : "text-charcoal active:scale-95"
+                      className={`text-2xl sm:text-3xl font-serif font-bold transition-all block py-2 ${location.pathname === link.href ? "text-primary italic" : "text-charcoal hover:text-primary"
                         }`}
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
@@ -145,13 +147,13 @@ const Header = () => {
                 <motion.div
                   initial={{ opacity: 0, scale: 0.9 }}
                   animate={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.6, duration: 0.6 }}
-                  className="mt-8"
+                  transition={{ delay: 0.4, duration: 0.4 }}
+                  className="mt-6 sm:mt-8 pt-6 sm:pt-8 border-t border-rose-100/30 dark:border-white/10"
                 >
                   <Magnetic strength={0.2}>
                     <Link
                       to="/download"
-                      className="btn-primary w-full py-5 text-xl text-center block shadow-glow"
+                      className="btn-primary w-full py-3 sm:py-4 text-base sm:text-lg text-center block"
                       onClick={() => setIsMobileMenuOpen(false)}
                     >
                       Download App
@@ -163,28 +165,20 @@ const Header = () => {
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ delay: 1 }}
-                className="mt-auto mb-16 text-center space-y-4"
+                transition={{ delay: 0.5 }}
+                className="mt-8 sm:mt-12 pt-6 sm:pt-8 border-t border-rose-100/30 dark:border-white/10 text-center space-y-4"
               >
                 <div className="flex justify-center items-center gap-3">
                   <div className="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
                     <Heart size={20} fill="currentColor" />
                   </div>
                 </div>
-                <p className="text-secondary-foreground text-sm font-bold tracking-[0.3em] uppercase">Lov Temple</p>
+                <p className="text-secondary-foreground text-xs sm:text-sm font-bold tracking-[0.3em] uppercase">Lov Temple</p>
               </motion.div>
-
-              {/* Close Button Inside Menu */}
-              <button
-                onClick={() => setIsMobileMenuOpen(false)}
-                className="absolute top-8 right-8 w-14 h-14 rounded-full bg-accent flex items-center justify-center text-primary active:scale-90 transition-transform"
-              >
-                <X className="w-8 h-8" />
-              </button>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </header>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };
